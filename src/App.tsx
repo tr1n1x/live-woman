@@ -1102,42 +1102,53 @@ const CheckoutPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Интеграция с Bitrix24 через вебхук
+    // Интеграция с Telegram ботом — уведомления нескольким получателям
     // @ts-ignore
-    const webhookUrl = import.meta.env.VITE_BITRIX24_WEBHOOK_URL;
+    const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+    // @ts-ignore
+    const chatIds = (import.meta.env.VITE_TELEGRAM_CHAT_IDS || '').split(',').map((id: string) => id.trim()).filter(Boolean);
 
-    if (webhookUrl) {
+    if (botToken && chatIds.length > 0) {
       try {
         const cleanTitle = event.title.replace(/<br\s*\/?>/gi, '');
-        const priceValue = parseInt(event.price.replace(/[^\d]/g, '')) || 0;
-        
-        await fetch(webhookUrl, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            fields: {
-              TITLE: `Заявка: ${cleanTitle}`,
-              NAME: formData.name,
-              PHONE: [{ VALUE: formData.phone, VALUE_TYPE: "WORK" }],
-              COMMENTS: `Telegram: ${formData.telegram}\nСобытие: ${cleanTitle}\nДата: ${event.date}\nЦена: ${event.price}`,
-              SOURCE_ID: "WEB",
-              OPPORTUNITY: priceValue,
-              CURRENCY_ID: "RUB"
-            }
-          })
-        });
+
+        const message = [
+          `📩 <b>Новая заявка с сайта!</b>`,
+          ``,
+          `📌 <b>Событие:</b> ${cleanTitle}`,
+          `📅 <b>Дата:</b> ${event.date}, ${event.time}`,
+          `📍 <b>Место:</b> ${event.location}`,
+          `💰 <b>Стоимость:</b> ${event.price}`,
+          ``,
+          `👤 <b>Имя:</b> ${formData.name}`,
+          `📱 <b>Телефон:</b> ${formData.phone}`,
+          `✈️ <b>Telegram:</b> ${formData.telegram || '—'}`,
+        ].join('\n');
+
+        // Отправляем всем получателям одновременно
+        await Promise.all(
+          chatIds.map((chatId: string) =>
+            fetch(`/api/telegram/bot${botToken}/sendMessage`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                chat_id: chatId,
+                text: message,
+                parse_mode: 'HTML',
+              }),
+            })
+          )
+        );
       } catch (error) {
-        console.error('Bitrix24 Error:', error);
+        console.error('Telegram Bot Error:', error);
       }
     } else {
-      console.log('Данные для CRM (вебхук не настроен):', {
+      console.log('Telegram бот не настроен. Данные заказа:', {
         event: event.title,
-        customer: formData
+        customer: formData,
       });
     }
 
-    // Имитация задержки платежного шлюза
     setTimeout(() => {
       navigate('/success');
     }, 1500);
