@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-display: "Cormorant Garamond", serif;
+  
+  --color-brand-milky: #F5F2EE;
+  --color-brand-pink: #C9A7A0;
+  --color-brand-olive: #7A7D5C;
+  --color-brand-brown: #8C6B63;
+  --color-brand-gold: #D6C3A3;
+  --color-brand-ink: #1A1A1A;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-milky text-brand-ink font-sans antialiased;
+  }
+}
+
+.text-reveal {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.glass {
+  @apply backdrop-blur-md bg-white/30 border border-white/20;
+}
+
+.serif-light {
+  font-family: var(--font-serif);
+  font-weight: 300;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.tracking-widest-plus {
+  letter-spacing: 0.3em;
+}
+
+/* Custom fade for page transitions */
+.page-fade-enter {
+  opacity: 0;
+}
+.page-fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
