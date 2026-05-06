@@ -65,7 +65,7 @@ const EVENTS: Event[] = [
     host: {
       name: 'Яна Маркина',
       role: 'тренер групповых программ',
-      image: '/yana.png',
+      image: '/yana.jpg',
       bio: 'Работает с телом через понимание его структуры и взаимосвязей. Её занятия — это внимательное движение без перегрузки, где тело постепенно раскрывается и начинает «отзываться». После практики остаётся ощущение лёгкости, собранности и внутреннего спокойствия'
     },
     capacityLabel: 'Всего 25 мест'
@@ -79,13 +79,13 @@ const EVENTS: Event[] = [
     location: '16place (16place.ru)',
     description: 'Возможность остановиться и посмотреть на себя чуть глубже',
     longDescription: 'Мы будем работать с тем, что обычно остаётся фоном: чувства, реакции, внутренние состояния. Без спешки и без правильных ответов. Ты много делаешь, справляешься, но в какой-то момент перестаёшь понимать — а что я чувствую? Эта практика — возможность вернуться к себе и услышать то, что давно отложено «на потом».',
-    image: '/visit2.png',
+    image: '/visit2.jpg',
     price: '2 900 ₽',
     category: 'Психология',
     host: {
       name: 'Ирина Кобелева',
       role: 'дипломированный психолог',
-      image: '/ira.png',
+      image: '/ira.jpg',
       bio: 'Работает в интегративном подходе, соединяя разные направления психотерапии. Создаёт пространство, в котором можно спокойно исследовать себя и находить свои ответы.'
     },
     capacityLabel: 'Всего 15 мест'
@@ -99,7 +99,7 @@ const EVENTS: Event[] = [
     location: 'Palace Bridge, Биржевой переулок, 2-4 (Санкт-Петербург)',
     description: 'Позвольте себе роскошь замедления: теплая вода, ароматы масел и тотальное расслабление каждой клеточки тела.',
     longDescription: 'Я буду рядом и аккуратно проведу тебя через это состояние. Это время без спешки и задач, созданное для тех, кто давно не останавливался и хочет снова почувствовать себя.',
-    image: '/visit3.png',
+    image: '/visit3.jpg',
     price: '5 500 ₽',
     category: 'SPA и ритуалы',
     host: {
@@ -120,10 +120,10 @@ const EVENTS: Event[] = [
 
 const GALLERY_IMAGES = [
   { url: '/visit1.jpg', title: 'Moment 1' },
-  { url: '/visit2.png', title: 'Moment 2' },
-  { url: '/visit3.png', title: 'Moment 3' },
+  { url: '/visit2.jpg', title: 'Moment 2' },
+  { url: '/visit3.jpg', title: 'Moment 3' },
   { url: '/visit1.jpg', title: 'Moment 4' },
-  { url: '/visit2.png', title: 'Moment 5' },
+  { url: '/visit2.jpg', title: 'Moment 5' },
 ];
 
 // --- Components ---
@@ -261,7 +261,7 @@ const Header = () => {
       {/* Background Image With Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/hero.jpg" 
+          src="/hero.png" 
           alt="Живая Женщина" 
           className="w-full h-full object-cover object-[75%] md:object-right opacity-70"
           referrerPolicy="no-referrer"
@@ -497,7 +497,7 @@ const IntroPowerSection = () => {
   return (
     <section className="py-40 px-6 relative overflow-hidden flex items-center justify-center min-h-[80vh]">
       <img 
-        src="/hero2.png" 
+        src="/hero2.jpg" 
         alt="" 
         className="absolute inset-0 w-full h-full object-cover object-center"
         referrerPolicy="no-referrer"
@@ -561,10 +561,10 @@ const FormatsSection = () => {
 const GallerySection = () => {
   const photos = [
     { src: '/visit1.jpg', alt: 'Moment 1', span: 'md:col-span-2 md:row-span-2' },
-    { src: '/visit2.png', alt: 'Moment 2', span: 'md:col-span-1 md:row-span-1' },
-    { src: '/visit3.png', alt: 'Moment 3', span: 'md:col-span-1 md:row-span-1' },
+    { src: '/visit2.jpg', alt: 'Moment 2', span: 'md:col-span-1 md:row-span-1' },
+    { src: '/visit3.jpg', alt: 'Moment 3', span: 'md:col-span-1 md:row-span-1' },
     { src: '/visit1.jpg', alt: 'Moment 4', span: 'md:col-span-1 md:row-span-2' },
-    { src: '/visit2.png', alt: 'Moment 5', span: 'md:col-span-2 md:row-span-2' },
+    { src: '/visit2.jpg', alt: 'Moment 5', span: 'md:col-span-2 md:row-span-2' },
   ];
 
   return (
@@ -1541,5 +1541,3 @@ export default function App() {
     </HelmetProvider>
   );
 }
-
-
