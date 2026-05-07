@@ -1094,64 +1094,49 @@ const CheckoutPage = () => {
   const event = EVENTS.find(e => e.id === id);
   const [formData, setFormData] = useState({ name: '', phone: '', telegram: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const navigate = useNavigate();
+  const [paymentError, setPaymentError] = useState('');
 
   if (!event) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setPaymentError('');
 
-    // Интеграция с Telegram ботом — уведомления нескольким получателям
-    // @ts-ignore
-    const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
-    // @ts-ignore
-    const chatIds = (import.meta.env.VITE_TELEGRAM_CHAT_IDS || '').split(',').map((id: string) => id.trim()).filter(Boolean);
+    try {
+      const cleanTitle = event.title.replace(/<br\s*\/?>/gi, '');
+      const priceValue = parseInt(event.price.replace(/[^\d]/g, '')) || 0;
+      const amountKopeks = priceValue * 100; // Т-Банк принимает в копейках
+      const orderId = `LW-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
 
-    if (botToken && chatIds.length > 0) {
-      try {
-        const cleanTitle = event.title.replace(/<br\s*\/?>/gi, '');
-
-        const message = [
-          `📩 <b>Новая заявка с сайта!</b>`,
-          ``,
-          `📌 <b>Событие:</b> ${cleanTitle}`,
-          `📅 <b>Дата:</b> ${event.date}, ${event.time}`,
-          `📍 <b>Место:</b> ${event.location}`,
-          `💰 <b>Стоимость:</b> ${event.price}`,
-          ``,
-          `👤 <b>Имя:</b> ${formData.name}`,
-          `📱 <b>Телефон:</b> ${formData.phone}`,
-          `✈️ <b>Telegram:</b> ${formData.telegram || '—'}`,
-        ].join('\n');
-
-        // Отправляем всем получателям одновременно
-        await Promise.all(
-          chatIds.map((chatId: string) =>
-            fetch(`/api/telegram/bot${botToken}/sendMessage`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                chat_id: chatId,
-                text: message,
-                parse_mode: 'HTML',
-              }),
-            })
-          )
-        );
-      } catch (error) {
-        console.error('Telegram Bot Error:', error);
-      }
-    } else {
-      console.log('Telegram бот не настроен. Данные заказа:', {
-        event: event.title,
-        customer: formData,
+      const response = await fetch('/api/payment/init', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          orderId,
+          amount: amountKopeks,
+          description: `Билет: ${cleanTitle}`.substring(0, 140),
+          customerName: formData.name,
+          customerPhone: formData.phone,
+          customerTelegram: formData.telegram,
+          eventId: event.id,
+        }),
       });
-    }
 
-    setTimeout(() => {
-      navigate('/success');
-    }, 1500);
+      const data = await response.json();
+
+      if (data.success && data.paymentUrl) {
+        // Редирект на страницу оплаты Т-Банка
+        window.location.href = data.paymentUrl;
+      } else {
+        setPaymentError(data.error || 'Ошибка при создании платежа. Попробуйте ещё раз.');
+        setIsSubmitting(false);
+      }
+    } catch (error) {
+      console.error('Payment error:', error);
+      setPaymentError('Не удалось подключиться к платёжной системе. Проверьте интернет.');
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -1236,6 +1221,12 @@ const CheckoutPage = () => {
                   />
                 </div>
               </div>
+
+              {paymentError && (
+                <div className="p-4 rounded-2xl bg-red-50 border border-red-200 text-red-600 text-sm text-center">
+                  {paymentError}
+                </div>
+              )}
 
               <button 
                 type="submit"

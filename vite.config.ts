@@ -16,7 +16,6 @@ export default defineConfig(({mode}) => {
       },
     },
     server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
       hmr: process.env.DISABLE_HMR !== 'true',
       proxy: {
         '/api/telegram': {
@@ -24,6 +23,10 @@ export default defineConfig(({mode}) => {
           changeOrigin: true,
           rewrite: (path: string) => path.replace(/^\/api\/telegram/, ''),
           secure: true,
+        },
+        '/api/payment': {
+          target: 'http://localhost:3001',
+          changeOrigin: true,
         },
       },
     },
