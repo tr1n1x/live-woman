@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+// Build version: 1.0.3 - Fixed assets and SVG
 import { motion, AnimatePresence } from 'motion/react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { 
@@ -18,10 +19,38 @@ import {
   Flower2,
   Wind,
   Send,
-  Plus
+  Plus,
+  Target,
+  CarFront,
+  Sparkles,
+  Music
 } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useParams, useLocation, useNavigate } from 'react-router-dom';
+
+// --- Asset Imports ---
+import heroImg from './assets/hero.jpg';
+import hero2Img from './assets/hero2.png';
+import annaImg from './assets/anna.jpg';
+import anna2Img from './assets/anna2.jpg';
+import iraImg from './assets/ira.png';
+import yanaImg from './assets/yana.png';
+import visit1Img from './assets/visit1.jpg';
+import visit2Img from './assets/visit2.png';
+import visit3Img from './assets/visit3.png';
+import golfImg from './assets/golf.jpg';
+import stileImg from './assets/stile.jpg';
+import juliyaImg from './assets/juliyaivanova.jpg';
+import dishesImg from './assets/dishes.jpg';
+import yachtImg from './assets/yacht.jpg';
+import poolsImg from './assets/pools.jpg';
+import detoxImg from './assets/detox.jpg';
+import horsesImg from './assets/horses.jpg';
+import womanImg from './assets/woman.jpg';
+import gunsImg from './assets/guns.jpg';
+import bmwImg from './assets/bmw.jpg';
+import makeupImg from './assets/makeup.jpg';
+import stripImg from './assets/strip.jpg';
 
 // --- Types ---
 
@@ -59,16 +88,22 @@ const EVENTS: Event[] = [
     location: 'Особняк Трубецких-Нарышкиных',
     description: 'Практика, в которой нет внешнего шума — только ты и твоё тело',
     longDescription: 'В старинном особняке, наполненном историей, мы создадим пространство тишины и внимания к себе.\n\nБез музыки — чтобы почувствовать, как откликается тело.\n\nМягкие практики помогут расслабиться и отпустить накопленное напряжение.\n\nПостепенно возвращается ощущение себя — спокойное и живое.\n\nИ именно это состояние ты унесёшь с собой.\n\n*В зале будет проходить небольшая фото- и видеосъемка.*',
-    image: '/visit1.jpg',
+    image: visit1Img,
     price: '3 100 ₽',
     category: 'Телесные практики',
     host: {
       name: 'Яна Маркина',
       role: 'тренер групповых программ',
-      image: '/yana.jpg',
+      image: yanaImg,
       bio: 'Работает с телом через понимание его структуры и взаимосвязей. Её занятия — это внимательное движение без перегрузки, где тело постепенно раскрывается и начинает «отзываться». После практики остаётся ощущение лёгкости, собранности и внутреннего спокойствия'
     },
-    capacityLabel: 'Всего 25 мест'
+    capacityLabel: 'Всего 25 мест',
+    program: [
+      'Мягкая практика в тишине особняка',
+      'Возвращение к ощущениям тела',
+      'Расслабление и отпускание напряжения',
+      'Небольшая фото- и видеосъемка на память'
+    ]
   },
   {
     id: '2',
@@ -78,17 +113,23 @@ const EVENTS: Event[] = [
     duration: '3 часа',
     location: '16place (16place.ru)',
     description: 'Возможность остановиться и посмотреть на себя чуть глубже',
-    longDescription: 'Мы будем работать с тем, что обычно остаётся фоном: чувства, реакции, внутренние состояния. Без спешки и без правильных ответов. Ты много делаешь, справляешься, но в какой-то момент перестаёшь понимать — а что я чувствую? Эта практика — возможность вернуться к себе и услышать то, что давно отложено «на потом».',
-    image: '/visit2.jpg',
+    longDescription: 'Мы будем работать с тем, что обычно остаётся фоном: чувства, реакции, внутренние состояния. Без спешки и без правильных ответов. Ты много делаешь, справляешься, но в какой-то момент перестаёшь понимать — а что я чувствую? Эта практика — возможность вернуться к себе и услышать то, что давно отложено «на потом».\n\n*На встрече будет проходить небольшая фото- и видеосъемка.*',
+    image: visit2Img,
     price: '2 900 ₽',
     category: 'Психология',
     host: {
       name: 'Ирина Кобелева',
       role: 'дипломированный психолог',
-      image: '/ira.jpg',
+      image: iraImg,
       bio: 'Работает в интегративном подходе, соединяя разные направления психотерапии. Создаёт пространство, в котором можно спокойно исследовать себя и находить свои ответы.'
     },
-    capacityLabel: 'Всего 15 мест'
+    capacityLabel: 'Всего 15 мест',
+    program: [
+      'Мягкое погружение в практику',
+      'Групповая работа с психологом',
+      'Индивидуальные инсайты и ответы',
+      'Фото- и видеосъемка на память'
+    ]
   },
   {
     id: '3',
@@ -99,13 +140,13 @@ const EVENTS: Event[] = [
     location: 'Palace Bridge, Биржевой переулок, 2-4 (Санкт-Петербург)',
     description: 'Позвольте себе роскошь замедления: теплая вода, ароматы масел и тотальное расслабление каждой клеточки тела.',
     longDescription: 'Я буду рядом и аккуратно проведу тебя через это состояние. Это время без спешки и задач, созданное для тех, кто давно не останавливался и хочет снова почувствовать себя.',
-    image: '/visit3.jpg',
+    image: visit3Img,
     price: '5 500 ₽',
     category: 'SPA и ритуалы',
     host: {
       name: 'Анна Зверкова',
       role: 'мастер ритуалов и игропрактик',
-      image: '/anna.jpg',
+      image: annaImg,
       bio: 'Помогаю женщинам восстановить связь со своей природной красотой через бережные ритуалы и глубокие практики.'
     },
     capacityLabel: 'Всего 10 мест',
@@ -113,17 +154,395 @@ const EVENTS: Event[] = [
       'тёплая вода и мягкое погружение в состояние',
       'сауны и хамам с ароматами и вниманием к телу',
       'время без спешки и задач',
-      'чай, лёгкое общение и практика с МАК-картами'
+      'чай, лёгкое общение и практика с МАК-картами',
+      'Фото- и видеосъемка ваших моментов релакса'
+    ]
+  },
+  {
+    id: '4',
+    title: 'Гольф: аристократизм <br /> и фокус',
+    date: '9 июня',
+    time: '12:00',
+    duration: '3 часа',
+    location: 'Загородный клуб (уточняется)',
+    description: 'Знакомство с самым элегантным видом спорта. Учимся попадать в цель без суеты и лишних движений.',
+    longDescription: 'Гольф — это не просто спорт, это философия концентрации и внутренней тишины. \n\nВ атмосфере аристократизма и спокойствия мы сделаем первые шаги на безупречном газоне. \n\nЭто практика фокуса: когда каждое движение выверено, а лишнее напряжение уходит. \n\nПосле игры нас ждет бранч на террасе, где в кругу единомышленниц мы поделимся впечатлениями и просто насладимся загородным воздухом.',
+    image: golfImg,
+    price: 'Уточняется',
+    category: 'Спорт и стиль',
+    host: {
+      name: 'Секретный гость',
+      role: 'Мастер спорта',
+      image: 'SECRET',
+      bio: 'Вас ждет встреча с профессиональным тренером, который влюблен в гольф и знает, как передать эту страсть и научить основам игры с нуля.'
+    },
+    capacityLabel: 'Всего 12 мест',
+    program: [
+      'Основы техники и этикета игры в гольф',
+      'Практика на поле под руководством профи',
+      'Элегантный бранч на террасе',
+      'Общение в атмосфере загородного релакса',
+      'Профессиональная фото- и видеосъемка'
+    ]
+  },
+  {
+    id: '5',
+    title: 'Формула дорогого <br /> образа',
+    date: '16 июня',
+    time: '12:00',
+    duration: '3 часа',
+    location: 'Студия стиля (уточняется)',
+    description: 'Секреты стилистов и магия деталей. Учимся выглядеть безупречно без лишних усилий.',
+    longDescription: 'Встреча-интенсив для тех, кто хочет управлять впечатлением о себе через одежду. \n\nМы разберем, как из простых базовых вещей собирать сложные, запоминающиеся образы, которые хочется рассматривать. \n\nЭто не просто про одежду — это про состояние уверенности, которое дает правильно подобранный образ.',
+    image: stileImg,
+    price: 'Уточняется',
+    category: 'Стиль и имидж',
+    host: {
+      name: 'Юлия Иванова',
+      role: 'Эксперт по визуальной коммуникации',
+      image: juliyaImg,
+      bio: 'Стилист с многолетним стажем, работающий с первыми лицами бизнеса. Мастер создания «дорогого» минимализма и капсул, которые подчеркивают статус. Юлия верит, что одежда — это кратчайший путь к самопознанию и способ заявить о себе миру без слов.'
+    },
+    capacityLabel: 'Всего 15 мест',
+    program: [
+      'Разбор «типы фигуры + крой»: идеальная посадка',
+      'Магия аксессуаров: как один акцент меняет всё',
+      'Секреты визуально «дорогого» монохрома',
+      'Твой личный акцент: создание уникального стиля',
+      'Фото- и видеосъемка вашего нового образа'
+    ]
+  },
+  {
+    id: '6',
+    title: 'Искусство этикета: <br /> красота в каждом жесте',
+    date: '23 июня',
+    time: '12:00',
+    duration: '2 часа',
+    location: 'Исторический ресторан (уточняется)',
+    description: 'Встреча с искусствоведом в изысканном интерьере. Учимся превращать обычный ужин в акт любви к себе.',
+    longDescription: 'Красота за столом — это не только о правильном положении вилки, но и об отношении к себе и окружающим. \n\nВ изысканной атмосфере мы разберем основы светского этикета, которые дают ту самую уверенность и легкость в любом обществе. \n\nВы узнаете секреты Pinterest-сервировки и как создавать магию из привычных вещей. \n\nЗавершим нашу встречу ужином с историей, где обсудим традиции гостеприимства и эстетики.',
+    image: dishesImg,
+    price: 'Уточняется',
+    category: 'Этикет и эстетика',
+    host: {
+      name: 'Секретный гость',
+      role: 'Искусствовед',
+      image: 'SECRET',
+      bio: 'Вас ждет встреча с экспертом, который влюблен в историю и знает всё о том, как эстетика меняет повседневную жизнь.'
+    },
+    capacityLabel: 'Всего 15 мест',
+    program: [
+      'Секреты Pinterest-сервировки: как создавать красоту',
+      'Светский этикет: уверенность и грация за столом',
+      'Ужин с историей: обсуждение традиций и эстетики',
+      'Практика в изысканном интерьере ресторана',
+      'Эстетичная фото- и видеосъемка вечера'
+    ]
+  },
+  {
+    id: '7',
+    title: 'Яхтинг под парусами: <br /> Ветер, Свобода и Баланс',
+    date: '30 июня',
+    time: '12:00',
+    duration: '3 часа',
+    location: 'Яхт-клуб (уточняется)',
+    description: 'Выход в Финский залив под белоснежным парусом. Формат для тех, кто мечтает ощутить драйв и умиротворение.',
+    longDescription: 'Выход в Финский залив под белоснежным парусом — это лучший способ почувствовать масштаб жизни. \n\nМы создали этот формат специально для тех, кто никогда не стоял у штурвала, но мечтает ощутить драйв и умиротворение открытой воды. \n\nЭто день, когда город остается далеко на берегу, а вы остаетесь наедине со своей внутренней стихией.',
+    image: yachtImg,
+    price: 'Уточняется',
+    category: 'Приключения и релакс',
+    host: {
+      name: 'Секретный капитан',
+      role: 'Опытный шкипер',
+      image: 'SECRET',
+      bio: 'Вас ждет прогулка под руководством профессионала, который влюблен в море и научит вас чувствовать ветер.'
+    },
+    capacityLabel: 'Всего 10 мест',
+    program: [
+      'Основы яхтинга: как устроена парусная яхта',
+      'Практика на воде: попробуй себя в роли штурмана',
+      'Фотосессия в стиле «Yacht Style» на палубе',
+      'Фуршет с игристым под плеск волн',
+      'Видеосъемка вашего морского приключения'
+    ]
+  },
+  {
+    id: '8',
+    title: 'Sun & Chill: <br /> Бассейн и гриль',
+    date: '7 июля',
+    time: '12:00',
+    duration: '4 часа',
+    location: 'Загородный клуб (уточняется)',
+    description: 'Перезагрузка у воды: твой идеальный летний день. Забываем о дедлайнах и городском шуме.',
+    longDescription: 'Забываем о дедлайнах и городском шуме. Мы отправляемся в одну из самых красивых локаций пригорода, чтобы провести день в стиле «Dolce Vita». \n\nСолнце, освежающая вода бассейна и аромат изысканного гриля — это наш способ сказать лету «да» и наполнить себя ресурсом. \n\nЭтот день — про легальный отдых, красивый загар и вкус к жизни в каждом кусочке и каждом вдохе.',
+    image: poolsImg,
+    price: 'Уточняется',
+    category: 'Релакс и бранч',
+    host: {
+      name: 'Анна Зверкова',
+      role: 'Основатель проекта «Живая Женщина»',
+      image: annaImg,
+      bio: 'Я помогаю каждой женщине найти свой баланс между внешним и внутренним. Наш бранч у бассейна — это возможность замедлиться, почувствовать вкус жизни и восстановить внутренний ресурс в безупречной атмосфере.'
+    },
+    capacityLabel: 'Всего 10 мест',
+    program: [
+      'Pool Day: отдых у бассейна в окружении сосен',
+      'Гриль-бранч от шефа: эстетичная подача и полезный рацион',
+      'Летний нетворкинг и душевные разговоры',
+      'Beauty-зона: советы по уходу и безопасному загару',
+      'Атмосферная фото- и видеосъемка отдыха'
+    ]
+  },
+  {
+    id: '9',
+    title: 'Ресурс: Как управлять <br /> своей энергией',
+    date: '14 июля',
+    time: '12:00',
+    duration: '2 часа',
+    location: 'Лекторий (уточняется)',
+    description: 'Энергия изнутри: Твой код здоровья и сияния. Узнаем, как восполнение дефицитов возвращает драйв.',
+    longDescription: 'Мы привыкли инвестировать время в проекты и близких, но часто забываем о главном источнике — своем физическом ресурсе. \n\nНа этой встрече мы разберем, как восполнение дефицитов и точечные настройки организма возвращают драйв, чистоту кожи и ту легкость, которая обычно бывает только в первый день отпуска. \n\nЭто стратегия управления своей биологией, чтобы ваша энергия всегда была на пике.\n\n*На встрече будет проходить небольшая фото- и видеосъемка.*',
+    image: detoxImg,
+    price: 'Уточняется',
+    category: 'Здоровье и биохакинг',
+    host: {
+      name: 'Секретный гость',
+      role: 'Нутрициолог / Эксперт Bioage',
+      image: 'SECRET',
+      bio: 'Вас ждет встреча с экспертом в области функциональной медицины, который знает, как настроить ваш организм на максимум.'
+    },
+    capacityLabel: 'Всего 15 мест',
+    program: [
+      'Чек-лист «Женский стандарт»: список необходимых анализов 35+',
+      'Разбор «Anti-age & Biohacking»: привычки, которые крадут ресурс',
+      'Лаборатория микроэлементов: витамины и минералы без дефицитов',
+      'Легкий healthy-перекус: энергия без тяжести',
+      'Эстетичная фото- и видеосъемка лектория'
+    ]
+  },
+  {
+    id: '10',
+    title: 'Ипподром: <br /> Искусство выездки',
+    date: '4 августа',
+    time: '12:00',
+    duration: '3 часа',
+    location: 'Конноспортивный клуб (уточняется)',
+    description: 'Выездка: танец силы и эстетики. Погрузитесь в мир самого элегантного вида спорта.',
+    longDescription: 'Погрузитесь в мир самого элегантного вида конного спорта. Выездка — это не просто прогулка, это высший уровень взаимопонимания между человеком и лошадью, где каждое движение отточено до совершенства. \n\nМы приглашаем вас в профессиональный манеж, чтобы почувствовать благородство этого спорта и обрести королевскую осанку. Это день, который подарит вам ощущение собственной силы, спокойствия и абсолютной грации.\n\n*На встрече будет проходить небольшая фото- и видеосъемка.*',
+    image: horsesImg,
+    price: 'Уточняется',
+    category: 'Спорт и эстетика',
+    host: {
+      name: 'Секретный гость',
+      role: 'Профессиональный тренер по выездке',
+      image: 'SECRET',
+      bio: 'Вас ждет встреча с мастером, который научит вас тонко чувствовать лошадь и контролировать каждое движение своего тела.'
+    },
+    capacityLabel: 'Всего 10 мест',
+    program: [
+      'Знакомство с философией выездки: «балет на лошадях»',
+      'Мастер-класс на манеже: азы управления и баланса',
+      'Индивидуальная работа над величественной осанкой',
+      'Tea-time в гостиной клуба с видом на поле',
+      'Профессиональная фото- и видеосъемка с лошадьми'
+    ]
+  },
+  {
+    id: '11',
+    title: 'Твоя скрытая опора: <br /> Практики здоровья',
+    date: '11 августа',
+    time: '12:00',
+    duration: '2 часа',
+    location: 'Студия (уточняется)',
+    description: 'Внутренний центр: Магия и сила мышц тазового дна. Разговор без табу о женском здоровье.',
+    longDescription: 'Существует фундамент женского здоровья и сексуальности, о котором не принято говорить громко, но именно он дарит нам уверенную походку, блеск в глазах и невероятную внутреннюю энергию. \n\nМы приглашаем вас на глубокую и бережную встречу с экспертом, где мы изучим анатомию своего удовольствия и научимся управлять своей главной опорой — мышцами тазового дна.\n\nЭта встреча — ваше личное признание в любви своему телу и самый короткий путь к состоянию тотальной чувственности.\n\n*На встрече будет проходить небольшая фото- и видеосъемка.*',
+    image: womanImg,
+    price: 'Уточняется',
+    category: 'Женское здоровье',
+    host: {
+      name: 'Секретный гость',
+      role: 'Эксперт по женскому здоровью',
+      image: 'SECRET',
+      bio: 'Вас ждет встреча с профессионалом, который поможет вам по-новому почувствовать свое тело и обрести внутреннюю опору.'
+    },
+    capacityLabel: 'Всего 20 мест',
+    program: [
+      'Разговор без табу: гормональный фон и качество жизни',
+      'Практическая лаборатория: освоение упражнений вумбилдинга',
+      'Архитектура тела: как тазовое дно меняет осанку и походку',
+      'Энергетический баланс: пробуждение спящих ресурсов',
+      'Небольшая фото- и видеосъемка процесса'
+    ]
+  },
+  {
+    id: '12',
+    title: 'Точка фокуса: <br /> Стрельба и сила',
+    date: '18 августа',
+    time: '12:00',
+    duration: '2 часа',
+    location: 'Стрелковый клуб (уточняется)',
+    description: 'Амазонка в городе: Искусство точного выстрела. Практика предельной концентрации и адреналиновый детокс.',
+    longDescription: 'Иногда, чтобы услышать себя, нужно нажать на курок и услышать выстрел. Мы отправляемся в профессиональный стрелковый клуб, чтобы сменить шелк на сталь и проверить свою способность сохранять ледяное спокойствие в моменте. \n\nЭто не просто стрельба — это практика предельной концентрации, где есть только ты, цель и твое дыхание. Это день, когда ты приручаешь свой страх и превращаешь его в абсолютную уверенность.\n\n*На встрече будет проходить небольшая фото- и видеосъемка.*',
+    image: gunsImg,
+    price: 'Уточняется',
+    category: 'Самопознание и драйв',
+    host: {
+      name: 'Секретный гость',
+      role: 'Инструктор по стрельбе',
+      image: 'SECRET',
+      bio: 'Вас ждет инструктаж от профессионала, который научит не просто попадать в цель, но и чувствовать свою внутреннюю опору через оружие.'
+    },
+    capacityLabel: 'Всего 10 мест',
+    program: [
+      'Инструктаж по владению боевым оружием',
+      'Практика тотального фокуса и контроля дыхания',
+      'Стрельба по мишеням: адреналиновый детокс',
+      'Фотосессия в стиле «Action» с оружием',
+      'Видеосъемка ваших точных попаданий'
+    ]
+  },
+  {
+    id: '15',
+    title: 'Пилатес в особняке Трубецких-Нарышкиных',
+    date: '25 августа',
+    time: '12:00',
+    duration: '2 часа',
+    location: 'Особняк Трубецких-Нарышкиных',
+    description: 'Практика, в которой нет внешнего шума — только ты и твоё тело (повтор)',
+    longDescription: 'В старинном особняке, наполненном историей, мы создадим пространство тишины и внимания к себе.\n\nМягкие практики помогут расслабиться и отпустить накопленное напряжение.\n\nПостепенно возвращается ощущение себя — спокойное и живое.\n\n*В зале будет проходить небольшая фото- и видеосъемка.*',
+    image: visit1Img,
+    price: 'Уточняется',
+    category: 'Телесные практики',
+    host: {
+      name: 'Яна Маркина',
+      role: 'тренер групповых программ',
+      image: yanaImg,
+      bio: 'Работает с телом через понимание его структуры и взаимосвязей. Её занятия — это внимательное движение без перегрузки, где тело постепенно раскрывается и начинает «отзываться».'
+    },
+    capacityLabel: 'Всего 25 мест',
+    program: [
+      'Мягкая практика в тишине особняка',
+      'Возвращение к ощущениям тела',
+      'Расслабление и отпускание напряжения',
+      'Небольшая фото- и видеосъемка на память'
+    ]
+  },
+  {
+    id: '16',
+    title: 'Спа-ритуал <br /> в Palace Bridge',
+    date: '8 сентября',
+    time: '12:00',
+    duration: '3 часа',
+    location: 'Palace Bridge, Биржевой переулок, 2-4 (Санкт-Петербург)',
+    description: 'Глубокая перезагрузка в атмосфере "тихой роскоши". Обретаем внутреннюю гармонию в сердце города.',
+    longDescription: 'Осень — время возвращения к своему центру. Мы приглашаем вас в Palace Bridge, чтобы смыть городской шум и наполнить себя теплом. \n\nВ программе — бережный уход за телом, созерцание и практики, которые помогают услышать свой внутренний голос. Это не просто отдых, а ритуал обретения целостности.\n\n*На встрече будет проходить небольшая фото- и видеосъемка.*',
+    image: visit3Img,
+    price: 'Уточняется',
+    category: 'SPA и ритуалы',
+    host: {
+      name: 'Анна Зверкова',
+      role: 'мастер ритуалов и игропрактик',
+      image: annaImg,
+      bio: 'Помогаю женщинам восстановить связь со своей природной красотой через бережные ритуалы и глубокие практики.'
+    },
+    capacityLabel: 'Всего 10 мест',
+    program: [
+      'Тепловая терапия: магия саун и хаммама',
+      'Погружение в тишину: медитативный отдых у воды',
+      'Ароматный чай и душевный нетворкинг',
+      'Практика настройки на ресурс через МАК-карты',
+      'Эстетичная фото- и видеосъемка вашего релакса'
+    ]
+  },
+  {
+    id: '13',
+    title: 'Drive & Control: <br /> Искусство скорости',
+    date: '15 сентября',
+    time: '12:00',
+    duration: '3 часа',
+    location: 'Автодром (уточняется)',
+    description: 'На грани: Твой контроль над стихией и дорогой. Тренинг устойчивости на трассе и в жизни.',
+    longDescription: 'Мы привыкли держать всё под контролем, но что, если земля уходит из-под колес? Мы отправляемся на автодром, чтобы научиться не бояться заносов, а управлять ими. \n\nЭто мощный тренинг устойчивости — и на трассе, и в жизни. Ты почувствуешь, как страх превращается в азарт, а неуверенность — в техничное мастерство. \n\nЭто день, когда ты перестаешь быть пассажиром обстоятельств и становишься пилотом своей судьбы.\n\n*На встрече будет проходить небольшая фото- и видеосъемка.*',
+    image: bmwImg,
+    price: 'Уточняется',
+    category: 'Драйв и мастерство',
+    host: {
+      name: 'Секретный гость',
+      role: 'Профессиональный автопилот',
+      image: 'SECRET',
+      bio: 'Вас ждет мастер-класс от эксперта по экстремальному вождению, который научит вас чувствовать автомобиль и не терять контроль в любой ситуации.'
+    },
+    capacityLabel: 'Всего 10 мест',
+    program: [
+      'Магия заноса: физика движения и стабилизация',
+      'Реакция и хладнокровие: экстренные маневры',
+      'Адреналиновый коктейль: власть над скоростью',
+      'Style & Speed: фотосессия на гоночном треке',
+      'Профессиональная видеосъемка заездов'
+    ]
+  },
+  {
+    id: '14',
+    title: 'Твое свежее сияние: <br /> Макияж уверенной женщины',
+    date: '22 сентября',
+    time: '12:00',
+    duration: '2 часа',
+    location: 'Бьюти-студия (уточняется)',
+    description: 'Эффект «Sun-kissed»: Свежесть курорта и идеальный макияж за 15 минут. Камерный бьюти-девичник с топ-визажистом.',
+    longDescription: 'Секрет по-настоящему дорогого образа кроется в идеальной, светящейся изнутри коже и легкости исполнения. \n\nМы приглашаем вас на камерный бьюти-девичник с топ-визажистом, где вы научитесь делать роскошный макияж всего за 15 минут. Это практический мастер-класс о том, как создать эффект «только что вернулась из отпуска» в разгар рабочих будней, подчеркнуть свою природную стать и добавить тот самый магнетический акцент во взгляд.\n\n*На встрече будет проходить небольшая фото- и видеосъемка.*',
+    image: makeupImg,
+    price: 'Уточняется',
+    category: 'Красота и уход',
+    host: {
+      name: 'Секретный гость',
+      role: 'Топ-визажист',
+      image: 'SECRET',
+      bio: 'Вас ждет встреча с профессионалом, который работает с глянцем и знает всё о том, как подчеркнуть вашу природную эстетику за считанные минуты.'
+    },
+    capacityLabel: 'Всего 15 мест',
+    program: [
+      'Тайминг роскоши: идеальный макияж за 15 минут',
+      'Магия «Sun-kissed»: техника создания отдохнувшего тона',
+      'Искусство акцента: дневной образ в уверенный вечерний',
+      'Честный разбор косметички: аудит ваших бьюти-средств',
+      'Сияющая фото- и видеосъемка ваших преображений'
+    ]
+  },
+  {
+    id: '17',
+    title: 'Тайный язык тела: <br /> Стрип-пластика',
+    date: '29 сентября',
+    time: '12:00',
+    duration: '2 часа',
+    location: 'Премиум-студия танца (уточняется)',
+    description: 'Грация и раскрепощение: Твой танец внутренней свободы. Снимаем мышечные зажимы и разговариваем на языке абсолютной грации.',
+    longDescription: 'Мы привыкли держать лицо, держать спину ровно и соответствовать статусу. Но где во всем этом живет наша плавная, дикая и притягательная женственность? \n\nСтрип-пластика — это танец не для зрителя, это танец для себя. В полумраке премиальной студии мы будем учиться отпускать социальные рамки, снимать мышечные зажимы и разговаривать на языке абсолютной грации. \n\nЭто практика, после которой ваше тело зазвучит как дорогой музыкальный инструмент. Это день, когда вы разрешаете себе быть любой: дерзкой, нежной, страстной и бесконечно красивой.\n\n*На встрече будет проходить небольшая фото- и видеосъемка.*',
+    image: stripImg,
+    price: 'Уточняется',
+    category: 'Танцы и чувственность',
+    host: {
+      name: 'Секретный гость',
+      role: 'Мастер стрип-пластики',
+      image: 'SECRET',
+      bio: 'Вас ждет встреча с профессионалом, который поможет вам отпустить контроль и научит ваше тело двигаться в ритме абсолютной женственности.'
+    },
+    capacityLabel: 'Всего 15 мест',
+    program: [
+      'Погружение в пластику: мягкая разминка и текучие движения',
+      'Снятие телесных блоков: работа со скованностью и зажимами',
+      'Атмосфера полного принятия: гипнотические ритмы и свет',
+      'Твое новое состояние: раскрепощение и магнетическая походка',
+      'Эстетичная фото- и видеосъемка вашей грации'
     ]
   }
 ];
 
 const GALLERY_IMAGES = [
-  { url: '/visit1.jpg', title: 'Moment 1' },
-  { url: '/visit2.jpg', title: 'Moment 2' },
-  { url: '/visit3.jpg', title: 'Moment 3' },
-  { url: '/visit1.jpg', title: 'Moment 4' },
-  { url: '/visit2.jpg', title: 'Moment 5' },
+  { url: visit1Img, title: 'Moment 1' },
+  { url: visit2Img, title: 'Moment 2' },
+  { url: visit3Img, title: 'Moment 3' },
+  { url: visit1Img, title: 'Moment 4' },
+  { url: visit2Img, title: 'Moment 5' },
 ];
 
 // --- Components ---
@@ -188,7 +607,7 @@ const Nav = () => {
         
         <div className="hidden md:flex items-center gap-12 text-[11px] uppercase tracking-[0.2em] font-medium text-brand-brown">
           <Link to="/about" className="hover:text-brand-pink transition-colors">О проекте</Link>
-          <Link to="/gallery" className="hover:text-brand-pink transition-colors">Галерея</Link>
+          {/* <Link to="/gallery" className="hover:text-brand-pink transition-colors">Галерея</Link> */}
           <Link to="/events" className="hover:text-brand-pink transition-colors">Встречи</Link>
           <Link to="/events" className="bg-brand-pink text-white px-8 py-3 rounded-full hover:bg-brand-brown transition-colors shadow-lg shadow-brand-brown/10">
             Хочу на встречу
@@ -215,7 +634,7 @@ const Nav = () => {
             <button className="absolute top-8 right-8 text-brand-brown" onClick={() => setIsMenuOpen(false)}>
               <X size={32} />
             </button>
-            {['О проекте', 'Галерея', 'Встречи'].map((item, i) => (
+            {['О проекте', 'Встречи'].map((item, i) => (
               <motion.div key={item}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -224,14 +643,6 @@ const Nav = () => {
                 {item === 'О проекте' ? (
                   <Link 
                     to="/about" 
-                    className="text-4xl serif-light text-brand-ink"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item}
-                  </Link>
-                ) : item === 'Галерея' ? (
-                  <Link 
-                    to="/gallery" 
                     className="text-4xl serif-light text-brand-ink"
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -261,7 +672,7 @@ const Header = () => {
       {/* Background Image With Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/hero.png" 
+          src={heroImg} 
           alt="Живая Женщина" 
           className="w-full h-full object-cover object-[75%] md:object-right opacity-70"
           referrerPolicy="no-referrer"
@@ -278,17 +689,18 @@ const Header = () => {
           >
             <div className="flex items-center gap-4 mb-8">
               <span className="w-12 h-[1px] bg-brand-brown/30" />
-              <span className="text-[10px] uppercase tracking-[0.4em] text-brand-brown font-semibold uppercase">Тишина. Тело. Женщина</span>
+              <span className="text-[10px] uppercase tracking-[0.4em] text-brand-brown font-semibold">Тишина. Тело. Женщина.</span>
             </div>
             
             <h1 className="text-[clamp(2.5rem,6vw,4.8rem)] serif-light leading-[1.1] mb-10 text-brand-brown">
-              Пространство, <br />
-              где ты снова становишься <span className="italic">собой</span>
+              Твое время. <br />
+              Твое тело. <br />
+              Твои правила.
             </h1>
             
-            <p className="text-2xl md:text-3xl font-display text-brand-brown/70 mb-12 max-w-lg leading-relaxed italic">
-              Живые встречи в Санкт-Петербурге: <br />
-              внимание к себе без спешки
+            <p className="text-lg md:text-xl font-light text-brand-brown/70 mb-12 max-w-xl leading-relaxed">
+              Пространство, где внешняя суета останавливается, уступая место твоей внутренней силе и красоте.
+              <span className="block mt-6">Живые встречи и эстетика в Санкт-Петербурге.</span>
             </p>
             
             <div className="flex flex-wrap gap-8 items-center">
@@ -330,7 +742,7 @@ const AboutSection = () => {
             <div className="relative">
               <div className="aspect-[4/5] overflow-hidden rounded-[4rem] relative z-10 shadow-2xl shadow-brand-brown/5 max-w-[80%] mx-auto lg:mx-0">
                 <img 
-                  src="/anna.jpg" 
+                  src={annaImg} 
                   alt="Анна Зверкова" 
                   className="w-full h-full object-cover object-top contrast-[0.9] brightness-[1.02] saturate-[0.95]"
                   referrerPolicy="no-referrer"
@@ -347,8 +759,8 @@ const AboutSection = () => {
                   {/* Decorative Olive Leaf Shadow */}
                   <div className="absolute -top-4 -right-4 text-brand-gold/10 rotate-12 transition-transform group-hover:rotate-45 duration-1000">
                     <svg width="100" height="100" viewBox="0 0 100 100" fill="currentColor" className="md:w-[120px] md:h-[120px]">
-                      <path d="M50 90C50 90 45 70 30 60C15 50 10 30 10 30C10 30 30 35 45 45C60 55 50 90 50 90Z opacity-20" />
-                      <path d="M50 90C50 90 55 70 70 60C85 50 90 30 90 30C90 30 70 35 55 45C40 55 50 90 50 90Z opacity-20" />
+                      <path d="M50 90C50 90 45 70 30 60C15 50 10 30 10 30C10 30 30 35 45 45C60 55 50 90 50 90Z" fillOpacity="0.2" />
+                      <path d="M50 90C50 90 55 70 70 60C85 50 90 30 90 30C90 30 70 35 55 45C40 55 50 90 50 90Z" fillOpacity="0.2" />
                     </svg>
                   </div>
 
@@ -451,42 +863,75 @@ const EventCalendar = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {EVENTS.map((event) => (
-            <motion.div 
-              key={event.id}
-              whileHover={{ y: -15 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="group"
-            >
-              <Link to={`/event/${event.id}`} className="block">
-                <div className="relative aspect-[3/4] overflow-hidden rounded-[3rem] mb-8 shadow-xl shadow-brand-brown/5">
-                  <img 
-                    src={event.image} 
-                    alt={event.title} 
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute top-6 left-6 glass px-5 py-2 rounded-full text-xs tracking-widest uppercase text-brand-ink">
-                    {event.date}
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-ink/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="space-y-32">
+          {[
+            { month: 'Май', key: 'мая' },
+            { month: 'Июнь', key: 'июня' },
+            { month: 'Июль', key: 'июля' },
+            { month: 'Август', key: 'августа' },
+            { month: 'Сентябрь', key: 'сентября' },
+          ].filter(monthGroup => 
+            EVENTS.some(e => e.date.toLowerCase().includes(monthGroup.key))
+          ).slice(0, 2).map((monthGroup) => {
+            const monthEvents = EVENTS.filter(e => e.date.toLowerCase().includes(monthGroup.key));
+            if (monthEvents.length === 0) return null;
+
+            return (
+              <div key={monthGroup.month} className="space-y-16">
+                <div className="flex items-center gap-6">
+                  <h3 className="text-2xl md:text-3xl serif-light text-brand-ink italic">{monthGroup.month}</h3>
+                  <div className="flex-grow h-[1px] bg-brand-pink/10" />
                 </div>
-                <div className="space-y-4 px-4">
-                  <div className="flex items-center gap-3 text-[10px] uppercase tracking-widest text-brand-brown/60">
-                    <span className="text-brand-pink">•</span>
-                    {event.category}
-                  </div>
-                  <h3 className="text-2xl serif-light group-hover:text-brand-pink transition-colors" dangerouslySetInnerHTML={{ __html: event.title }} />
-                  <p className="text-base text-brand-brown/50 line-clamp-2 leading-relaxed">{event.description}</p>
-                  <div className="flex justify-between items-center pt-4 border-t border-brand-pink/10">
-                    <span className="text-lg font-medium text-brand-ink whitespace-nowrap">{event.price}</span>
-                    <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-brand-brown group-hover:underline transition-all">Подробнее</span>
-                  </div>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+                  {monthEvents.map((event) => (
+                    <motion.div 
+                      key={event.id}
+                      whileHover={{ y: -15 }}
+                      transition={{ duration: 0.5, ease: "easeOut" }}
+                      className="group"
+                    >
+                      <Link to={`/event/${event.id}`} className="block">
+                        <div className="relative aspect-[3/4] overflow-hidden rounded-[3rem] mb-8 shadow-xl shadow-brand-brown/5">
+                          <img 
+                            src={event.image} 
+                            alt={event.title} 
+                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                            referrerPolicy="no-referrer"
+                          />
+                          <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-5 py-2 rounded-full text-[10px] sm:text-xs tracking-[0.2em] font-bold uppercase text-brand-ink shadow-sm border border-brand-pink/10">
+                            {event.date}
+                          </div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-brand-ink/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        </div>
+                        <div className="space-y-4 px-4">
+                          <div className="flex items-center gap-3 text-[10px] uppercase tracking-widest text-brand-brown/60">
+                            <span className="text-brand-pink">•</span>
+                            {event.category}
+                          </div>
+                          <h3 className="text-2xl serif-light group-hover:text-brand-pink transition-colors" dangerouslySetInnerHTML={{ __html: event.title }} />
+                          <p className="text-base text-brand-brown/50 line-clamp-2 leading-relaxed">{event.description}</p>
+                          <div className="flex justify-between items-center pt-4 border-t border-brand-pink/10">
+                            <span className="text-lg font-medium text-brand-ink whitespace-nowrap">{event.price}</span>
+                            <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-brand-brown group-hover:underline transition-all">Подробнее</span>
+                          </div>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  ))}
                 </div>
-              </Link>
-            </motion.div>
-          ))}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-28 text-center">
+          <Link 
+            to="/events" 
+            className="inline-flex items-center gap-4 bg-brand-pink text-white px-12 py-5 rounded-full text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-brand-brown transition-all shadow-2xl shadow-brand-pink/20 group"
+          >
+            Смотреть все встречи
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
       </div>
     </section>
@@ -497,7 +942,7 @@ const IntroPowerSection = () => {
   return (
     <section className="py-40 px-6 relative overflow-hidden flex items-center justify-center min-h-[80vh]">
       <img 
-        src="/hero2.jpg" 
+        src={hero2Img} 
         alt="" 
         className="absolute inset-0 w-full h-full object-cover object-center"
         referrerPolicy="no-referrer"
@@ -511,9 +956,9 @@ const IntroPowerSection = () => {
         </h2>
         <div className="w-24 h-[1px] bg-brand-pink mx-auto mb-12" />
         <p className="max-w-3xl mx-auto text-brand-brown/70 leading-relaxed font-light italic text-xl md:text-2xl drop-shadow-sm">
-          В каждой из нас пульсирует мощная сила жизни и энергия, способная созидать миры.<br /><br />
-          За заботой о детях и бесконечными делами мы часто забываем об этом источнике.<br /><br />
-          Наши встречи — это пространство, где можно замедлиться и снова вспомнить о своей истинной природе.
+          Внутри тебя скрыт огромный ресурс — энергия, которая может быть плавной, как вода, и дерзкой, как выстрел.<br /><br />
+          За рабочими графиками, заботой о близких и бесконечными списками задач мы часто теряем контакт с этим источником, привыкая просто функционировать.<br /><br />
+          Наши встречи — это повод поставить рутину на паузу. Чтобы не просто отдохнуть, а заново познакомиться с собой: настоящей, разной и бесконечно Живой.
         </p>
       </div>
     </section>
@@ -522,10 +967,10 @@ const IntroPowerSection = () => {
 
 const FormatsSection = () => {
   const formats = [
-    { title: 'Психология и любовь', icon: <Heart size={20} />, items: ['Самоценность', 'Сексология', 'Отношения'] },
-    { title: 'Стиль и красота', icon: <Star size={20} />, items: ['Визаж', 'Имидж-коды', 'Нутрициология'] },
-    { title: 'Телесная осознанность', icon: <Wind size={20} />, items: ['Мягкая йога', 'Пилатес', 'Танцы'] },
-    { title: 'Ритуалы заботы', icon: <Flower2 size={24} />, items: ['SPA-дни', 'Медитации', 'Баня'] },
+    { title: 'Отдых и Ресурс', icon: <Flower2 size={24} />, items: ['SPA-ритуалы', 'Медитации в тишине', 'Камерные бранчи'] },
+    { title: 'Эстетика и Стиль', icon: <Sparkles size={20} />, items: ['Make-Up девичники', 'Имидж-коды', 'Фотосессии «Action»'] },
+    { title: 'Тело и Грация', icon: <Music size={20} />, items: ['Пилатес в особняках', 'Женская йога', 'Стрип-пластика'] },
+    { title: 'Драйв и Сила', icon: <Target size={20} />, items: ['Стрелковый клуб', 'Экстремальное вождение', 'Конный спорт'] },
   ];
 
   return (
@@ -560,11 +1005,11 @@ const FormatsSection = () => {
 
 const GallerySection = () => {
   const photos = [
-    { src: '/visit1.jpg', alt: 'Moment 1', span: 'md:col-span-2 md:row-span-2' },
-    { src: '/visit2.jpg', alt: 'Moment 2', span: 'md:col-span-1 md:row-span-1' },
-    { src: '/visit3.jpg', alt: 'Moment 3', span: 'md:col-span-1 md:row-span-1' },
-    { src: '/visit1.jpg', alt: 'Moment 4', span: 'md:col-span-1 md:row-span-2' },
-    { src: '/visit2.jpg', alt: 'Moment 5', span: 'md:col-span-2 md:row-span-2' },
+    { src: visit1Img, alt: 'Moment 1', span: 'md:col-span-2 md:row-span-2' },
+    { src: visit2Img, alt: 'Moment 2', span: 'md:col-span-1 md:row-span-1' },
+    { src: visit3Img, alt: 'Moment 3', span: 'md:col-span-1 md:row-span-1' },
+    { src: visit1Img, alt: 'Moment 4', span: 'md:col-span-1 md:row-span-2' },
+    { src: visit2Img, alt: 'Moment 5', span: 'md:col-span-2 md:row-span-2' },
   ];
 
   return (
@@ -621,7 +1066,7 @@ const EventDetail = () => {
         description={event.description} 
         keywords={`${event.category}, ${eventTitleClean}, женские встречи спб, практики для женщин`}
       />
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto overflow-hidden">
         <Link to="/events" className="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest text-brand-pink font-bold mb-12 hover:ml-2 transition-all">
           <ChevronRight className="rotate-180" size={12} />
           Вернуться к календарю
@@ -639,7 +1084,7 @@ const EventDetail = () => {
                 <span className="w-8 h-[1px] bg-brand-pink/20" />
                 <span className="text-[10px] uppercase tracking-widest text-brand-brown/60 italic">{event.date} / {event.time}</span>
               </div>
-              <h1 className="text-5xl md:text-7xl serif-light text-brand-ink mb-12 leading-[1.1]" dangerouslySetInnerHTML={{ __html: event.title }} />
+              <h1 className="text-3xl sm:text-5xl md:text-7xl serif-light text-brand-ink mb-12 leading-[1.1] break-words" dangerouslySetInnerHTML={{ __html: event.title }} />
               
               <div className="glass p-6 md:p-10 rounded-[2.5rem] md:rounded-[3rem] space-y-8 md:space-y-10 border-brand-pink/10 shadow-2xl shadow-brand-brown/5 mb-16">
                 <div className="flex items-start gap-4 md:gap-6">
@@ -678,9 +1123,9 @@ const EventDetail = () => {
                           initial={{ opacity: 0, x: -20 }}
                           whileInView={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          className="flex items-center gap-6 p-6 rounded-3xl bg-brand-pink/5 border border-brand-pink/5 group hover:bg-brand-pink/10 transition-colors"
+                          className="flex items-start md:items-center gap-4 md:gap-6 p-4 md:p-6 rounded-3xl bg-brand-pink/5 border border-brand-pink/5 group hover:bg-brand-pink/10 transition-colors"
                         >
-                          <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-brand-pink font-display italic text-lg shadow-sm shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-brand-pink font-display italic text-lg shadow-sm shrink-0 mt-1 md:mt-0">
                             {index + 1}
                           </div>
                           <p className="text-brand-brown font-light italic">{item}</p>
@@ -721,13 +1166,19 @@ const EventDetail = () => {
               <h4 className="text-[10px] uppercase tracking-widest text-brand-brown font-bold mb-8 text-center">Ведущая встречи</h4>
               <div className="flex flex-col items-center mb-10">
                 <div className="relative mb-6">
-                  <div className="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-brand-pink/20 shadow-2xl bg-brand-milky">
-                    <img 
-                      src={event.host.image} 
-                      alt={event.host.name} 
-                      className="w-full h-full object-cover object-top scale-110" 
-                      referrerPolicy="no-referrer"
-                    />
+                  <div className="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-brand-pink/20 shadow-2xl bg-brand-milky flex items-center justify-center">
+                    {event.host.image === 'SECRET' ? (
+                      <div className="w-full h-full bg-brand-pink/5 flex items-center justify-center p-8 text-brand-pink/30">
+                        <WomanSilhouette className="w-full h-full" />
+                      </div>
+                    ) : (
+                      <img 
+                        src={event.host.image} 
+                        alt={event.host.name} 
+                        className="w-full h-full object-cover object-top scale-110" 
+                        referrerPolicy="no-referrer"
+                      />
+                    )}
                   </div>
                   <div className="absolute -bottom-1 -right-1 bg-white rounded-full p-2 shadow-md">
                     <Heart size={14} className="text-brand-pink fill-brand-pink" />
@@ -742,16 +1193,25 @@ const EventDetail = () => {
                 {event.host.bio}
               </p>
               <div className="pt-8 border-t border-brand-pink/10">
-                <div className="flex justify-between items-center mb-8">
-                   <div className="text-sm uppercase tracking-widest text-brand-brown font-bold">Стоимость участия</div>
-                   <div className="text-3xl serif-light text-brand-ink whitespace-nowrap">{event.price}</div>
+                <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
+                   <div className="text-[10px] sm:text-xs uppercase tracking-widest text-brand-brown font-bold text-center sm:text-left">Стоимость участия</div>
+                   <div className="text-2xl sm:text-3xl serif-light text-brand-ink">{event.price}</div>
                 </div>
-                <Link 
-                  to={`/checkout/${event.id}`}
-                  className="w-full bg-brand-pink text-white py-5 rounded-full font-bold text-lg hover:bg-brand-brown transition-colors shadow-xl shadow-brand-brown/20 flex items-center justify-center"
-                >
-                  Купить билет
-                </Link>
+                {event.price === 'Уточняется' || !event.price.includes('₽') ? (
+                  <Link 
+                    to={`/checkout/${event.id}`}
+                    className="w-full border border-brand-pink text-brand-pink py-5 rounded-full font-bold text-lg hover:bg-brand-pink hover:text-white transition-colors flex items-center justify-center gap-2"
+                  >
+                    Чат предзаписи
+                  </Link>
+                ) : (
+                  <Link 
+                    to={`/checkout/${event.id}`}
+                    className="w-full bg-brand-pink text-white py-5 rounded-full font-bold text-lg hover:bg-brand-brown transition-colors shadow-xl shadow-brand-brown/20 flex items-center justify-center"
+                  >
+                    Купить билет
+                  </Link>
+                )}
                 {event.capacityLabel && (
                   <p className="text-center text-[10px] text-brand-brown/40 uppercase tracking-widest mt-6">
                     {event.capacityLabel}
@@ -789,7 +1249,7 @@ const Footer = () => {
             <h5 className="text-[10px] uppercase tracking-widest font-bold text-brand-pink">Меню</h5>
             <ul className="space-y-4 text-sm text-brand-brown/80 font-light">
               <li><Link to="/about">О проекте</Link></li>
-              <li><Link to="/gallery">Фотогалерея</Link></li>
+              {/* <li><Link to="/gallery">Фотогалерея</Link></li> */}
               <li><Link to="/events">Календарь</Link></li>
               <li><a href="/#types">Форматы</a></li>
             </ul>
@@ -822,7 +1282,10 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto pt-20 mt-20 border-t border-brand-pink/5 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
         <div className="flex flex-col gap-2">
           <p className="text-[9px] uppercase tracking-[0.3em] text-brand-brown/40">© 2026 Живая Женщина. Дизайн с душой.</p>
-          <p className="text-[9px] uppercase tracking-[0.3em] text-brand-brown/30 font-medium">ИП Зверкова Анна Андреевна</p>
+          <div className="flex flex-col gap-1 text-[9px] uppercase tracking-[0.3em] text-brand-brown/30 font-medium">
+            <p>ИП Зверкова Анна Андреевна</p>
+            <p>ИНН 710306810329 | ОГРНИП 317784700046787</p>
+          </div>
         </div>
         <p className="text-[9px] uppercase tracking-[0.3em] text-brand-brown/40">Спб, ул. Итальянская, 12</p>
       </div>
@@ -868,7 +1331,7 @@ const AboutPage = () => {
               className="relative aspect-[4/5] rounded-[4rem] overflow-hidden group shadow-2xl shadow-brand-brown/10"
             >
               <img 
-                src="/anna2.jpg" 
+                src={anna2Img} 
                 alt="Пространство" 
                 className="w-full h-full object-cover grayscale-[20%] group-hover:scale-105 transition-transform duration-1000"
                 referrerPolicy="no-referrer"
@@ -1033,54 +1496,78 @@ const EventsPage = () => {
           <h1 className="text-4xl md:text-6xl serif-light text-brand-ink">Выбери время для себя</h1>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {EVENTS.map((event) => (
-            <motion.div 
-              key={event.id}
-              whileHover={{ y: -10 }}
-              className="group"
-            >
-              <Link to={`/event/${event.id}`} className="block">
-                <div className="relative aspect-[3/4] overflow-hidden rounded-[3rem] mb-8 shadow-xl shadow-brand-brown/5">
-                  <img 
-                    src={event.image} 
-                    alt={event.title} 
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute top-6 left-6 glass px-5 py-2 rounded-full text-xs tracking-widest uppercase text-brand-ink">
-                    {event.date}
-                  </div>
+        <div className="space-y-32">
+          {[
+            { month: 'Май', key: 'мая' },
+            { month: 'Июнь', key: 'июня' },
+            { month: 'Июль', key: 'июля' },
+            { month: 'Август', key: 'августа' },
+            { month: 'Сентябрь', key: 'сентября' },
+          ].map((monthGroup) => {
+            const monthEvents = EVENTS.filter(e => e.date.toLowerCase().includes(monthGroup.key));
+            if (monthEvents.length === 0) return null;
+
+            return (
+              <div key={monthGroup.month} className="space-y-16">
+                <div className="flex items-center gap-6">
+                  <h3 className="text-2xl md:text-4xl serif-light text-brand-ink italic">{monthGroup.month}</h3>
+                  <div className="flex-grow h-[1px] bg-brand-pink/10" />
                 </div>
-                <div className="space-y-4 px-4">
-                  <div className="flex items-center gap-3 text-[10px] uppercase tracking-widest text-brand-brown/60">
-                    <span className="text-brand-pink">•</span>
-                    {event.category}
-                  </div>
-                  <h3 className="text-2xl serif-light group-hover:text-brand-pink transition-colors" dangerouslySetInnerHTML={{ __html: event.title }} />
-                  <p className="text-base text-brand-brown/50 line-clamp-2 leading-relaxed">{event.description}</p>
-                  <div className="flex justify-between items-center pt-4 border-t border-brand-pink/10 text-brand-ink font-medium">
-                    <span className="whitespace-nowrap">{event.price}</span>
-                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-all text-brand-pink" />
-                  </div>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+                  {monthEvents.map((event) => (
+                    <motion.div 
+                      key={event.id}
+                      whileHover={{ y: -10 }}
+                      className="group"
+                    >
+                      <Link to={`/event/${event.id}`} className="block">
+                        <div className="relative aspect-[3/4] overflow-hidden rounded-[3rem] mb-8 shadow-xl shadow-brand-brown/5">
+                          <img 
+                            src={event.image} 
+                            alt={event.title} 
+                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                            referrerPolicy="no-referrer"
+                          />
+                          <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-5 py-2 rounded-full text-[10px] sm:text-xs tracking-[0.2em] font-bold uppercase text-brand-ink shadow-sm border border-brand-pink/10">
+                            {event.date}
+                          </div>
+                        </div>
+                        <div className="space-y-4 px-4">
+                          <div className="flex items-center gap-3 text-[10px] uppercase tracking-widest text-brand-brown/60">
+                            <span className="text-brand-pink">•</span>
+                            {event.category}
+                          </div>
+                          <h3 className="text-2xl serif-light group-hover:text-brand-pink transition-colors" dangerouslySetInnerHTML={{ __html: event.title }} />
+                          <p className="text-base text-brand-brown/50 line-clamp-2 leading-relaxed">{event.description}</p>
+                          <div className="flex justify-between items-center pt-4 border-t border-brand-pink/10 text-brand-ink font-medium">
+                            <span className="whitespace-nowrap">{event.price}</span>
+                            <ArrowRight size={18} className="group-hover:translate-x-1 transition-all text-brand-pink" />
+                          </div>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  ))}
                 </div>
-              </Link>
-            </motion.div>
-          ))}
+              </div>
+            );
+          })}
         </div>
 
         {/* SEO Text Block */}
         <div className="mt-40 pt-20 border-t border-brand-pink/10 max-w-4xl">
-          <h2 className="text-2xl serif-light text-brand-ink mb-8">О встречах проекта «Живая Женщина» в Санкт-Петербурге</h2>
+          <h2 className="text-2xl serif-light text-brand-ink mb-8">О проекте «Живая Женщина» в Санкт-Петербурге</h2>
           <div className="text-brand-brown/60 text-sm leading-relaxed space-y-6 font-light">
             <p>
-              Проект «Живая Женщина» — это уникальное пространство в Санкт-Петербурге, объединяющее осознанных женщин для совместных практик, психологических встреч и телесного развития. Наши мероприятия проходят в исторических особняках и атмосферных студиях города, создавая идеальные условия для глубокого погружения в свое состояние.
+              Проект «Живая Женщина» — это премиальное пространство в Санкт-Петербурге, где каждая встреча становится событием, меняющим масштаб вашей личности. Мы объединяем осознанных женщин для совместных практик, интеллектуальных лекториев и незабываемых впечатлений в самых атмосферных локациях города.
             </p>
             <p>
-              Мы предлагаем занятия пилатесом, женской йогой, психологические тренинги и арт-терапию. Каждая встреча — это шаг к обретению внутренней гармонии, уверенности и радости жизни. Присоединяйтесь к нашему женскому клубу, чтобы найти единомышленниц и время для самой важной встречи — встречи с собой.
+              Наша афиша мероприятий охватывает все грани современной женщины: от мягких практик пилатеса в исторических особняках до драйвовых выездов на автодром или в стрелковый тир. Мы приглашаем топовых экспертов в области биохакинга, нутрициологии, визажа и психологии, чтобы вы могли инвестировать время в свой главный ресурс — в себя.
             </p>
             <p>
-              Наши девичники в СПб — это не просто отдых, а бережная работа с состоянием. Мы верим, что в каждой женщине скрыт источник неисчерпаемой энергии, и помогаем его раскрыть через тишину, движение и искреннее общение.
+              В нашем календаре вы найдете как классические SPA-ритуалы и женские бранчи, так и эксклюзивные форматы: школу верховой езды, мастер-классы по созданию «дорогого» образа и практики пробуждения чувственности через танец. Присоединяйтесь к нашему закрытому сообществу единомышленниц в СПб, чтобы обрести королевскую осанку, внутреннюю опору и то самое сияние, которое притягивает взгляды.
+            </p>
+            <p>
+              Каждый девичник «Живая Женщина» — это эстетическое удовольствие, бережная работа с состоянием и возможность выйти за рамки привычной рутины. Мы верим, что истинная сила женщины — в её многогранности, и помогаем раскрыть каждую из них через качественный отдых, новые знания и искреннее общение.
             </p>
           </div>
         </div>
@@ -1091,6 +1578,7 @@ const EventsPage = () => {
 
 const CheckoutPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const event = EVENTS.find(e => e.id === id);
   const [formData, setFormData] = useState({ name: '', phone: '', telegram: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -1104,9 +1592,10 @@ const CheckoutPage = () => {
     setPaymentError('');
 
     try {
-      const cleanTitle = event.title.replace(/<br\s*\/?>/gi, '');
-      const priceValue = parseInt(event.price.replace(/[^\d]/g, '')) || 0;
-      const amountKopeks = priceValue * 100; // Т-Банк принимает в копейках
+      const cleanTitle = event.title.replace(/<br\s*\/?>/gi, ' ');
+      const isPreorder = event.price === 'Уточняется' || !event.price.includes('₽');
+      const priceValue = isPreorder ? 0 : (parseInt(event.price.replace(/[^\d]/g, '')) || 0);
+      const amountKopeks = priceValue * 100;
       const orderId = `LW-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
 
       const response = await fetch('/api/payment/init', {
@@ -1116,6 +1605,7 @@ const CheckoutPage = () => {
           orderId,
           amount: amountKopeks,
           description: `Билет: ${cleanTitle}`.substring(0, 140),
+          eventTitle: cleanTitle,
           customerName: formData.name,
           customerPhone: formData.phone,
           customerTelegram: formData.telegram,
@@ -1125,9 +1615,14 @@ const CheckoutPage = () => {
 
       const data = await response.json();
 
-      if (data.success && data.paymentUrl) {
-        // Редирект на страницу оплаты Т-Банка
-        window.location.href = data.paymentUrl;
+      if (data.success) {
+        if (data.isPreorder) {
+          // Редирект на страницу успеха для предзаписи
+          navigate('/success?preorder=true');
+        } else if (data.paymentUrl) {
+          // Редирект на страницу оплаты Т-Банка
+          window.location.href = data.paymentUrl;
+        }
       } else {
         setPaymentError(data.error || 'Ошибка при создании платежа. Попробуйте ещё раз.');
         setIsSubmitting(false);
@@ -1157,14 +1652,14 @@ const CheckoutPage = () => {
           <div className="order-1 lg:order-1 space-y-8">
             <div className="glass p-8 md:p-12 rounded-[3rem] border-brand-pink/10 shadow-xl shadow-brand-brown/5">
               <h1 className="text-3xl serif-light text-brand-ink mb-8">Ваше участие</h1>
-              <div className="flex gap-6 mb-8 pb-8 border-b border-brand-pink/10">
-                <div className="w-24 h-32 rounded-2xl overflow-hidden shadow-md">
+              <div className="flex flex-col sm:flex-row gap-6 mb-8 pb-8 border-b border-brand-pink/10">
+                <div className="w-full sm:w-24 h-48 sm:h-32 rounded-2xl overflow-hidden shadow-md">
                   <img src={event.image} alt="" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 </div>
-                <div>
-                  <div className="text-[10px] uppercase tracking-widest text-brand-pink font-bold mb-2">{event.category}</div>
-                  <h3 className="text-xl serif-light text-brand-ink mb-2" dangerouslySetInnerHTML={{ __html: event.title }} />
-                  <div className="text-sm text-brand-brown/60">{event.date} в {event.time}</div>
+                <div className="flex-grow">
+                  <div className="text-[10px] uppercase tracking-widest text-brand-pink font-bold mb-2 text-center sm:text-left">{event.category}</div>
+                  <h3 className="text-xl serif-light text-brand-ink mb-2 text-center sm:text-left" dangerouslySetInnerHTML={{ __html: event.title }} />
+                  <div className="text-sm text-brand-brown/60 text-center sm:text-left">{event.date} в {event.time}</div>
                 </div>
               </div>
               <div className="space-y-4">
@@ -1241,7 +1736,7 @@ const CheckoutPage = () => {
                   />
                 ) : (
                   <>
-                    <span>Оплатить участие</span>
+                    <span>{event.price === 'Уточняется' || !event.price.includes('₽') ? 'Отправить заявку' : 'Оплатить участие'}</span>
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </>
                 )}
@@ -1268,6 +1763,10 @@ const CheckoutPage = () => {
 };
 
 const SuccessPage = () => {
+  const [searchParams] = React.useSearchParams();
+  const orderId = searchParams.get('orderId');
+  const isPreorder = searchParams.get('preorder') === 'true';
+
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -1275,38 +1774,110 @@ const SuccessPage = () => {
       exit={{ opacity: 0 }}
       className="min-h-screen py-40 px-6 flex items-center justify-center text-center"
     >
-      <SEO title="До встречи!" />
+      <SEO title={isPreorder ? "Заявка принята" : "До встречи!"} />
       <div className="max-w-2xl px-8">
         <motion.div 
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: "spring", damping: 12 }}
-          className="w-24 h-24 bg-brand-pink/10 rounded-full flex items-center justify-center mx-auto mb-12"
+          className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-12 shadow-inner"
         >
-          <Heart size={40} className="text-brand-pink fill-brand-pink" />
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            <Heart size={40} className="text-green-500 fill-green-500" />
+          </motion.div>
         </motion.div>
         
-        <h1 className="text-4xl md:text-5xl serif-light text-brand-ink mb-8">Место забронировано</h1>
-        <p className="text-xl text-brand-brown/70 serif-light leading-relaxed mb-12">
-          Благодарю за доверие. В ближайшее время в Telegram вам придет подтверждение и детали встречи.
+        <h1 className="text-3xl md:text-5xl serif-light text-brand-ink mb-8">
+          {isPreorder ? 'Заявка принята!' : 'Билет забронирован!'}
+        </h1>
+        <p className="text-lg md:text-xl text-brand-brown/70 serif-light leading-relaxed mb-12">
+          {isPreorder 
+            ? 'Мы получили ваш запрос. Как только откроется запись и определится стоимость, мы свяжемся с вами в Telegram.'
+            : 'Ваша оплата прошла успешно. В ближайшее время в Telegram вам придет подтверждение и детали встречи.'}
         </p>
         
         <div className="space-y-6 flex flex-col items-center">
+          {orderId && (
+            <p className="text-xs text-brand-brown/40 mb-4 uppercase tracking-widest font-bold">
+              Номер заказа: #{orderId}
+            </p>
+          )}
+
+          {isPreorder && (
+            <a 
+              href="https://t.me/AnnaZverkovaWeb" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-brand-pink text-white px-12 py-4 rounded-full hover:bg-brand-brown transition-all shadow-lg w-full max-w-xs"
+            >
+              Написать нам в TG
+            </a>
+          )}
+
           <Link 
             to="/" 
-            className="inline-block bg-brand-brown text-white px-12 py-4 rounded-full hover:bg-brand-ink transition-all shadow-lg w-full max-w-xs"
+            className={`inline-block px-12 py-4 rounded-full transition-all w-full max-w-xs ${isPreorder ? 'border border-brand-brown text-brand-brown hover:bg-brand-brown hover:text-white' : 'bg-brand-brown text-white hover:bg-brand-ink shadow-lg'}`}
           >
             На главную
           </Link>
           <Link 
             to="/events" 
-            className="inline-block border border-brand-pink text-brand-pink px-12 py-4 rounded-full hover:bg-brand-pink hover:text-white transition-all w-full max-w-xs"
+            className={`inline-block px-12 py-4 rounded-full transition-all w-full max-w-xs border ${isPreorder ? 'border-brand-pink text-brand-pink hover:bg-brand-pink hover:text-white' : 'border-brand-pink text-brand-pink hover:bg-brand-pink hover:text-white'}`}
           >
             К календарю встреч
           </Link>
-          <div className="block pt-8 text-sm text-brand-brown/40 italic font-light">
-            Это будет прекрасное время для тебя.
-          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const FailurePage = () => {
+  const [searchParams] = React.useSearchParams();
+  const orderId = searchParams.get('orderId');
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="min-h-screen py-40 px-6 flex items-center justify-center text-center"
+    >
+      <SEO title="Ошибка оплаты" />
+      <div className="max-w-2xl px-8">
+        <div className="w-24 h-24 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-12">
+          <X size={40} className="text-red-500" />
+        </div>
+        
+        <h1 className="text-3xl md:text-5xl serif-light text-brand-ink mb-8">Оплата не прошла</h1>
+        <p className="text-lg md:text-xl text-brand-brown/70 serif-light leading-relaxed mb-12">
+          К сожалению, транзакция была отклонена или произошла ошибка. Если деньги списаны, свяжитесь с нами в Telegram.
+        </p>
+        
+        {orderId && (
+          <p className="text-xs text-brand-brown/40 mb-12 uppercase tracking-widest font-bold">
+            Номер заказа: #{orderId}
+          </p>
+        )}
+        
+        <div className="space-y-6 flex flex-col items-center">
+          <Link 
+            to="/events" 
+            className="inline-block bg-brand-pink text-white px-12 py-4 rounded-full hover:bg-brand-brown transition-all shadow-lg w-full max-w-xs"
+          >
+            Попробовать еще раз
+          </Link>
+          <a 
+            href="https://t.me/AnnaZverkovaWeb" 
+            target="_blank"
+            className="inline-block border border-brand-brown text-brand-brown px-12 py-4 rounded-full hover:bg-brand-brown hover:text-white transition-all w-full max-w-xs"
+          >
+            Написать в поддержку
+          </a>
         </div>
       </div>
     </motion.div>
@@ -1428,8 +1999,8 @@ const OfferPage = () => {
             <h2 className="text-xl font-medium text-brand-ink mb-4">7. Реквизиты Исполнителя</h2>
             <div className="text-sm space-y-2 text-brand-brown/70 italic">
               <p>Исполнитель: ИП Зверкова Анна Андреевна</p>
-              <p>ИНН: ________________ (указать ваш ИНН)</p>
-              <p>ОГРНИП: _______________ (указать ваш ОГРНИП)</p>
+              <p>ИНН: 710306810329</p>
+              <p>ОГРНИП: 317784700046787</p>
               <p>Служба поддержки: @AnnaZverkovaWeb</p>
             </div>
           </section>
@@ -1466,12 +2037,12 @@ const LandingPage = () => {
             transition={{ duration: 1.2 }}
           >
             <h2 className="text-4xl md:text-6xl serif-light mb-12 text-brand-ink leading-tight">
-              Тебе не нужно становиться лучше. <br className="hidden md:block" /> Достаточно <span className="italic">остановиться</span>.
+              Тебе не нужно становиться лучше. <br className="hidden md:block" /> Достаточно просто <span className="italic">остановиться</span>.
             </h2>
             <div className="w-16 h-[1px] bg-brand-pink/20 mx-auto mb-12" />
             <p className="text-xl md:text-2xl text-brand-brown/70 serif-light italic leading-relaxed mb-20 max-w-3xl mx-auto">
-              Иногда всё, что нам нужно — это немного тишины, внимания и времени для себя. 
-              И в этом состоянии начинает возвращаться энергия, желания и вкус к жизни.
+              Иногда всё, что нам нужно — это время для себя, в котором нет расписания. 
+              И в этом состоянии свободы снова рождается энергия, смелость желать и вкус к каждому моменту.
             </p>
             
             <a 
@@ -1486,7 +2057,7 @@ const LandingPage = () => {
                 className="group relative inline-flex flex-col items-center gap-4 focus:outline-none"
               >
                 <div className="px-16 py-7 bg-brand-pink text-white rounded-full font-bold text-lg hover:bg-brand-brown transition-all shadow-2xl shadow-brand-pink/20 uppercase tracking-[0.2em] relative z-10">
-                  Подписаться на наш телеграм
+                  Наш Telegram-канал
                 </div>
                 <span className="text-[10px] uppercase tracking-[0.4em] text-brand-pink font-bold opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-500">
                   Больше вдохновения и анонсов
@@ -1516,9 +2087,10 @@ export default function App() {
             <Route path="/event/:id" element={<EventDetail />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/events" element={<EventsPage />} />
-            <Route path="/gallery" element={<GalleryPage />} />
+            {/* <Route path="/gallery" element={<GalleryPage />} /> */}
             <Route path="/checkout/:id" element={<CheckoutPage />} />
             <Route path="/success" element={<SuccessPage />} />
+            <Route path="/fail" element={<FailurePage />} />
             <Route path="/offer" element={<OfferPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
           </Routes>

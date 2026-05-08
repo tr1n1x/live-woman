@@ -6,6 +6,22 @@
     <title>Живая Женщина — Пространство тишины и возвращения к себе</title>
     <meta name="description" content="Женские встречи и телесные практики в Санкт-Петербурге. Пространство для тех, кто ищет тишину, паузу и путь к себе." />
     <meta name="keywords" content="женские практики спб, девичники петербург, психологические встречи спб, медитации санкт-петербург, женский клуб спб, саморазвитие для женщин" />
+    <script>
+      // Force unregister all service workers to clear cache and fix 404/SVG errors
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for(let registration of registrations) {
+            registration.unregister().then(function(boolean) {
+              if (boolean) {
+                console.log('Old Service Worker unregistered successfully.');
+                window.location.reload();
+              }
+            });
+          }
+        });
+      }
+    </script>
+    <!-- Build Version: 1.0.2 - SW Purge -->
   </head>
   <body>
     <div id="root"></div>
