@@ -51,6 +51,8 @@ import bmwImg from './assets/bmw.jpg';
 import makeupImg from './assets/makeup.jpg';
 import stripImg from './assets/strip.jpg';
 import svetlanaImg from './assets/svetlana.jpg';
+import DreamProjectPage, { DreamJoinPage } from './DreamProjectPage';
+import './dream.css';
 
 // --- Types ---
 
@@ -535,6 +537,7 @@ function ScrollToTop() {
 const Nav = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -546,6 +549,8 @@ const Nav = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isMenuOpen]);
+
+  if (location.pathname.startsWith('/mechta-kak-proekt-tarif-')) return null;
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 px-6 py-6 transition-all duration-500 ${isScrolled ? 'glass py-4 border-none' : 'bg-transparent'}`}>
@@ -2042,6 +2047,9 @@ export default function App() {
             <Route path="/fail" element={<FailurePage />} />
             <Route path="/offer" element={<OfferPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/dream-project" element={<DreamProjectPage />} />
+            <Route path="/mechta-kak-proekt-tarif-solo" element={<DreamJoinPage plan="solo" />} />
+            <Route path="/mechta-kak-proekt-tarif-vip" element={<DreamJoinPage plan="vip" />} />
           </Routes>
           <Footer />
           
