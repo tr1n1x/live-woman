@@ -1189,7 +1189,8 @@ const Footer = () => {
              <BrandLogo className="text-3xl mb-4" />
           </Link>
           <p className="text-brand-brown/60 text-sm leading-relaxed italic font-light">
-            Пространство, где тебя слышат и вдохновляют. Санкт-Петербург.
+            Пространство, где тебя слышат и вдохновляют.<br />
+            Санкт-Петербург.
           </p>
           <div className="flex gap-6">
             <a href="https://t.me/AnnaZverkovaWeb" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-brand-pink/20 flex items-center justify-center text-brand-brown hover:bg-brand-brown hover:text-white transition-all group">
