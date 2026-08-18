@@ -1,8 +1,8 @@
 import { motion } from 'motion/react';
-import { ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { ChevronDown, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import annaPortrait from './assets/anna-light.png';
 import annaJourney from './assets/anna2.jpg';
 import dreamHeroParis from './assets/dream-hero-paris.png';
@@ -146,17 +146,28 @@ export default function DreamProjectPage() {
 }
 
 export function DreamJoinPage({ plan }: { plan: 'solo' | 'vip' }) {
+  const navigate = useNavigate();
   const support = plan === 'vip';
   const title = support ? 'С сопровождением' : 'Самостоятельно';
   const price = support ? '5 000 ₽' : '2 000 ₽';
   const telegram = support ? 'https://t.me/+S6zALjcy5Q01NzMy' : 'https://t.me/+EjaGuBbzCl5mYzU6';
+  const close = () => navigate('/dream-project#tariffs');
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') close();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
 
   return (
-    <main className={`dream-page dream-join-page ${support ? 'dream-join-page--vip' : ''}`}>
+    <main className={`dream-page dream-join-page ${support ? 'dream-join-page--vip' : ''}`} onClick={close}>
       <Helmet><title>{support ? 'Мечта как проект — тариф VIP' : 'Мечта как проект — тариф Соло'}</title></Helmet>
-      <div className="dream-join-card">
+      <div className="dream-join-card" onClick={(event) => event.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="dream-plan-title">
+        <button className="dream-join-close" type="button" onClick={close} aria-label="Закрыть и вернуться к тарифам"><X size={20}/></button>
         <p className="dream-kicker">Мечта как проект · выбранный формат</p>
-        <h1>{title}</h1>
+        <h1 id="dream-plan-title">{title}</h1>
         <div className="dream-join-price">{price}</div>
         <p className="dream-join-schedule"><strong>24–28 августа</strong><span>Прямые эфиры ежедневно в 21:00 МСК</span></p>
         <div className="dream-join-line" />

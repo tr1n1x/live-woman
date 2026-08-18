@@ -527,10 +527,16 @@ const BrandLogo = ({ className = "" }: { className?: string }) => (
 );
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    window.requestAnimationFrame(() => {
+      if (hash) {
+        document.getElementById(hash.slice(1))?.scrollIntoView();
+      } else {
+        window.scrollTo(0, 0);
+      }
+    });
+  }, [pathname, hash]);
   return null;
 }
 
@@ -550,7 +556,7 @@ const Nav = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isMenuOpen]);
 
-  if (location.pathname.startsWith('/mechta-kak-proekt-tarif-')) return null;
+  if (location.pathname === '/dream-project' || location.pathname.startsWith('/mechta-kak-proekt-tarif-')) return null;
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 px-6 py-6 transition-all duration-500 ${isScrolled ? 'glass py-4 border-none' : 'bg-transparent'}`}>
