@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { ChevronDown, X } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import annaPortrait from './assets/anna-light.png';
@@ -23,7 +23,7 @@ const faqs = [
   ['Чем отличаются два формата участия?', 'В формате «С сопровождением» к материалам добавляется до 60 минут личной работы Анны с вашей мечтой, расчётами и структурой проекта.'],
 ];
 
-const Button = ({ children, href = '#tariffs', light = false }: { children: React.ReactNode; href?: string; light?: boolean }) => {
+const Button = ({ children, href = '#tariffs', light = false }: { children: ReactNode; href?: string; light?: boolean }) => {
   const isExternal = href.startsWith('http');
   return <a className={`dream-button ${light ? 'dream-button--light' : ''}`} href={href} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined}>{children}<span>↗</span></a>;
 };

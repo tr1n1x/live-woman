@@ -4,5 +4,9 @@ dist/
 coverage/
 .DS_Store
 *.log
+data/guide-orders.json
+data/guide-orders.json.tmp
 .env*
 !.env.example
+tmp/
+private/*.pdf

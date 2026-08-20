@@ -26,7 +26,7 @@ import {
   Music
 } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useParams, useLocation, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate, useParams, useLocation, useNavigate } from 'react-router-dom';
 
 // --- Asset Imports ---
 import heroImg from './assets/hero.jpg';
@@ -52,6 +52,7 @@ import makeupImg from './assets/makeup.jpg';
 import stripImg from './assets/strip.jpg';
 import svetlanaImg from './assets/svetlana.jpg';
 import DreamProjectPage, { DreamJoinPage } from './DreamProjectPage';
+import { ImperialGuideDownloadPage, ImperialGuidePage } from './ImperialGuidePage';
 import './dream.css';
 
 // --- Types ---
@@ -101,6 +102,7 @@ const EVENTS: Event[] = [
       bio: 'Работает в интегративном подходе, соединяя разные направления психотерапии. Создаёт пространство, в котором можно спокойно исследовать себя и находить свои ответы.'
     },
     capacityLabel: 'Всего 15 мест',
+    hidden: true,
     program: [
       'Мягкое погружение в практику',
       'Групповая работа с психологом',
@@ -127,6 +129,7 @@ const EVENTS: Event[] = [
       bio: 'Помогаю женщинам восстановить связь со своей природной красотой через бережные ритуалы и глубокие практики.'
     },
     capacityLabel: 'Всего 10 мест',
+    hidden: true,
     program: [
       'тёплая вода и мягкое погружение в состояние',
       'сауны и хамам с ароматами и вниманием к телу',
@@ -183,6 +186,7 @@ const EVENTS: Event[] = [
       bio: 'Светлана Прохорова — один из самых ярких экспертов по столовому этикету в России. Её миссия — возродить культуру русского этикета и сделать эти знания живыми, доступными и по-настоящему нужными. Она превращает сервировку стола в искусство и философию жизни — за ужином с ней понимаешь: красота в деталях это не пафос, а уважение к себе. Героиня статьи журнала Formula People — издания для тех, кто создаёт стиль, а не следует за ним.'
     },
     capacityLabel: 'Всего 10 мест',
+    hidden: true,
     program: [
       'Искусство сервировки: от классики до Pinterest-эстетики',
       'Секреты столового этикета: уверенность и грация за столом',
@@ -210,6 +214,7 @@ const EVENTS: Event[] = [
       bio: 'Работает с телом через понимание его структуры и взаимосвязей. Её занятия — это внимательное движение без перегрузки, где тело постепенно раскрывается и начинает «отзываться». После практики остаётся ощущение лёгкости, собранности и внутреннего спокойствия'
     },
     capacityLabel: 'Всего 25 мест',
+    hidden: true,
     program: [
       'Мягкая практика в тишине особняка',
       'Возвращение к ощущениям тела',
@@ -236,6 +241,7 @@ const EVENTS: Event[] = [
       bio: 'Наш капитан — профессионал с многолетним опытом ходинг в Балтийском море. У него особый дар — передавать любовь к открытой воде так, что вы почувствуете её с первого взгляда.'
     },
     capacityLabel: 'Только 5 мест',
+    hidden: true,
     program: [
       'Частная яхта, зарезервированная только для вас пятерых',
       'Прогулка по Финскому заливу под руководством опытного шкипера',
@@ -263,6 +269,7 @@ const EVENTS: Event[] = [
       bio: 'Я помогаю каждой женщине найти свой баланс между внешним и внутренним. Наш бранч у бассейна — это возможность замедлиться, почувствовать вкус жизни и восстановить внутренний ресурс в безупречной атмосфере.'
     },
     capacityLabel: 'Всего 10 мест',
+    hidden: true,
     program: [
       'Pool Day: отдых у бассейна в окружении сосен',
       'Гриль-бранч от шефа: эстетичная подача и полезный рацион',
@@ -290,6 +297,7 @@ const EVENTS: Event[] = [
       bio: 'Вас ждет встреча с мастером, который научит вас тонко чувствовать лошадь и контролировать каждое движение своего тела.'
     },
     capacityLabel: 'Всего 10 мест',
+    hidden: true,
     program: [
       'Знакомство с философией выездки: «балет на лошадях»',
       'Мастер-класс на манеже: азы управления и баланса',
@@ -317,6 +325,7 @@ const EVENTS: Event[] = [
       bio: 'Вас ждет встреча с профессионалом, который поможет вам по-новому почувствовать свое тело и обрести внутреннюю опору.'
     },
     capacityLabel: 'Всего 20 мест',
+    hidden: true,
     program: [
       'Разговор без табу: гормональный фон и качество жизни',
       'Практическая лаборатория: освоение упражнений вумбилдинга',
@@ -344,6 +353,7 @@ const EVENTS: Event[] = [
       bio: 'Вас ждет инструктаж от профессионала, который научит не просто попадать в цель, но и чувствовать свою внутреннюю опору через оружие.'
     },
     capacityLabel: 'Всего 10 мест',
+    hidden: true,
     program: [
       'Инструктаж по владению боевым оружием',
       'Практика тотального фокуса и контроля дыхания',
@@ -556,7 +566,7 @@ const Nav = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isMenuOpen]);
 
-  if (location.pathname === '/dream-project' || location.pathname.startsWith('/mechta-kak-proekt-tarif-')) return null;
+  if (location.pathname === '/dream-project' || location.pathname.startsWith('/mechta-kak-proekt-tarif-') || location.pathname.startsWith('/imperatorskiy-peterburg')) return null;
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 px-6 py-6 transition-all duration-500 ${isScrolled ? 'glass py-4 border-none' : 'bg-transparent'}`}>
@@ -1010,9 +1020,9 @@ const GallerySection = () => {
 
 const EventDetail = () => {
   const { id } = useParams();
-  const event = EVENTS.find(e => e.id === id);
+  const event = EVENTS.find(e => e.id === id && !e.hidden);
 
-  if (!event) return <div>Событие не найдено</div>;
+  if (!event) return <Navigate to="/events" replace />;
   const eventTitleClean = event.title.replace(/<br\s*\/?>/gi, '');
 
   return (
@@ -1540,12 +1550,12 @@ const EventsPage = () => {
 const CheckoutPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const event = EVENTS.find(e => e.id === id);
+  const event = EVENTS.find(e => e.id === id && !e.hidden);
   const [formData, setFormData] = useState({ name: '', phone: '', telegram: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [paymentError, setPaymentError] = useState('');
 
-  if (!event) return null;
+  if (!event) return <Navigate to="/events" replace />;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -2036,6 +2046,27 @@ const LandingPage = () => {
   );
 };
 
+const SiteChrome = () => {
+  const location = useLocation();
+  if (location.pathname.startsWith('/imperatorskiy-peterburg')) return null;
+  return <>
+    <Footer />
+    <motion.a
+      href="https://t.me/AnnaZverkovaWeb"
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      title="Наш Telegram-канал"
+      className="fixed bottom-8 right-8 z-50 w-16 h-16 bg-brand-pink text-white rounded-full shadow-2xl flex items-center justify-center transition-all hover:bg-brand-brown"
+    >
+      <Send size={24} />
+    </motion.a>
+  </>;
+};
+
 export default function App() {
   return (
     <HelmetProvider>
@@ -2057,23 +2088,10 @@ export default function App() {
             <Route path="/dream-project" element={<DreamProjectPage />} />
             <Route path="/mechta-kak-proekt-tarif-solo" element={<DreamJoinPage plan="solo" />} />
             <Route path="/mechta-kak-proekt-tarif-vip" element={<DreamJoinPage plan="vip" />} />
+            <Route path="/imperatorskiy-peterburg" element={<ImperialGuidePage />} />
+            <Route path="/imperatorskiy-peterburg/download" element={<ImperialGuideDownloadPage />} />
           </Routes>
-          <Footer />
-          
-          {/* Floating Telegram Button */}
-          <motion.a
-            href="https://t.me/AnnaZverkovaWeb"
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            title="Наш Telegram-канал"
-            className="fixed bottom-8 right-8 z-50 w-16 h-16 bg-brand-pink text-white rounded-full shadow-2xl flex items-center justify-center transition-all hover:bg-brand-brown"
-          >
-            <Send size={24} />
-          </motion.a>
+          <SiteChrome />
         </div>
       </Router>
     </HelmetProvider>
