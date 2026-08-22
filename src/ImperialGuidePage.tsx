@@ -5,7 +5,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import hero from './assets/imperial-guide-hero-clean.png';
 import dayOne from './assets/imperial-guide-day-1.png';
 import dayTwo from './assets/imperial-guide-day-2.png';
-import waterView from './assets/imperial-guide-water-view.png';
+import thankYouPhoto from './assets/imperial-guide-thank-you-neva.jpg';
 import './imperial-guide.css';
 
 export function ImperialGuidePage() {
@@ -155,7 +155,7 @@ export function ImperialGuideDownloadPage() {
       <Helmet><title>Ваш гайд — Императорский Петербург</title></Helmet>
       <div className="imperial-download__card">
         <div className="imperial-download__photo" aria-hidden="true">
-          <img src={waterView} alt="" />
+          <img src={thankYouPhoto} alt="" />
         </div>
         <div className="imperial-download__content">
           <p className="imperial-script">Спасибо</p>
