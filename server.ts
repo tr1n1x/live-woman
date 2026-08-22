@@ -273,7 +273,7 @@ async function startServer() {
         TerminalKey: TBANK_TERMINAL_KEY,
         Amount: GUIDE_PRICE,
         OrderId: orderId,
-        Description: 'PDF-гайд «Императорский Петербург — открыла и пошла»',
+        Description: 'PDF-гайд «Императорский Петербург»',
         PayType: 'O',
         Language: 'ru',
         SuccessURL: successUrl,

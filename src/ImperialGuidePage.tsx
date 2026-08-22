@@ -8,7 +8,7 @@ import cover from './assets/imperial-guide-cover.png';
 import preview from './assets/imperial-guide-preview.png';
 import './imperial-guide.css';
 
-const PRODUCT_TITLE = 'Императорский Петербург — открыла и пошла';
+const PRODUCT_TITLE = 'Императорский Петербург';
 
 export function ImperialGuidePage() {
   const [checkoutOpen, setCheckoutOpen] = useState(false);
@@ -40,7 +40,7 @@ export function ImperialGuidePage() {
     <main className="imperial-guide">
       <Helmet>
         <title>Императорский Петербург — готовый маршрут на 48 часов</title>
-        <meta name="description" content="Готовый маршрут по императорскому Петербургу: Яндекс Карты, бронирования, контакты и красивые ракурсы. Открыла и пошла." />
+        <meta name="description" content="Готовый маршрут по императорскому Петербургу: Яндекс Карты, бронирования, контакты и красивые ракурсы. Открыть и пойти." />
       </Helmet>
 
       <section className="imperial-hero">
@@ -100,7 +100,7 @@ export function ImperialGuidePage() {
       </section>
 
       <section className="imperial-final">
-        <p className="imperial-script">Открыла и пошла</p>
+        <p className="imperial-script">Открыть и пойти</p>
         <h2>{PRODUCT_TITLE}</h2>
         <div className="imperial-price">290 ₽</div>
         <button className="imperial-button imperial-button--dark" onClick={() => setCheckoutOpen(true)}>
