@@ -3,8 +3,8 @@ import { ArrowRight, Check, Download, X } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useSearchParams } from 'react-router-dom';
 import hero from './assets/imperial-guide-hero-clean.png';
-import cover from './assets/imperial-guide-cover.png';
-import preview from './assets/imperial-guide-preview.png';
+import dayOne from './assets/imperial-guide-day-1.png';
+import dayTwo from './assets/imperial-guide-day-2.png';
 import './imperial-guide.css';
 
 export function ImperialGuidePage() {
@@ -63,8 +63,8 @@ export function ImperialGuidePage() {
 
       <section className="imperial-includes">
         <div className="imperial-includes__visual">
-          <img src={cover} alt="Обложка платного гайда" />
-          <img src={preview} alt="Пример страницы с маршрутом" />
+          <img src={dayOne} alt="Первый день маршрута — Старые деньги и красивая жизнь" />
+          <img src={dayTwo} alt="Второй день маршрута — Петербургская Ривьера" />
         </div>
         <div className="imperial-includes__copy">
           <p className="imperial-kicker">Внутри гайда</p>
