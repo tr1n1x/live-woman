@@ -3,7 +3,6 @@ import { ArrowRight, Check, Download, X } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useSearchParams } from 'react-router-dom';
 import hero from './assets/imperial-guide-hero.png';
-import scene from './assets/imperial-guide-scene.png';
 import cover from './assets/imperial-guide-cover.png';
 import preview from './assets/imperial-guide-preview.png';
 import './imperial-guide.css';
@@ -73,11 +72,6 @@ export function ImperialGuidePage() {
             <li><Check size={18} /> точки и красивые ракурсы для фотографий</li>
           </ul>
         </div>
-      </section>
-
-      <section className="imperial-quote">
-        <div className="imperial-quote__photo"><img src={scene} alt="Атмосфера императорского Петербурга" /></div>
-        <div className="imperial-quote__brown" aria-hidden="true" />
       </section>
 
       <section className="imperial-steps">

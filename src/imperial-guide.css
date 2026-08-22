@@ -62,3 +62,16 @@
   .imperial-steps__grid{grid-template-columns:minmax(0,1fr);width:100%;box-sizing:border-box}
   .imperial-steps article,.imperial-steps article:last-child{width:100%;min-width:0;box-sizing:border-box}
 }
+
+/* Lighter editorial transition from the cover into the page */
+.imperial-hero__content{background:linear-gradient(90deg,rgba(82,57,45,.97) 0%,rgba(82,57,45,.88) 55%,rgba(82,57,45,.34) 100%)}
+
+@media(max-width:760px){
+  .imperial-hero{background:var(--cream)}
+  .imperial-hero__content{margin-top:-185px;padding:82px 22px 34px;background:linear-gradient(180deg,rgba(241,236,227,0) 0%,rgba(241,236,227,.94) 30%,var(--cream) 48%);color:var(--brown)}
+  .imperial-hero__content .imperial-lead{margin:0 0 22px;color:var(--brown);font-size:25px;line-height:1.12}
+  .imperial-hero__content .imperial-button{background:var(--brown);color:#fff;box-shadow:0 14px 34px rgba(79,53,42,.18)}
+  .imperial-hero__content .imperial-button:hover{background:#49372e}
+  .imperial-intro{padding-top:54px}
+  .imperial-final{background:var(--cream);border-top:1px solid #d8cbbd}
+}
