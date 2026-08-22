@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowRight, Check, Download, X } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useSearchParams } from 'react-router-dom';
-import hero from './assets/imperial-guide-hero.png';
+import hero from './assets/imperial-guide-hero-clean.png';
 import cover from './assets/imperial-guide-cover.png';
 import preview from './assets/imperial-guide-preview.png';
 import './imperial-guide.css';
@@ -42,6 +42,11 @@ export function ImperialGuidePage() {
 
       <section className="imperial-hero">
         <img src={hero} alt="Императорский Петербург" className="imperial-hero__image" />
+        <div className="imperial-hero__title">
+          <p className="imperial-hero__eyebrow">Авторский гид Анны Зверковой</p>
+          <h1>Императорский<br /><em>Петербург</em></h1>
+          <p className="imperial-hero__script">48 часов со мной</p>
+        </div>
         <div className="imperial-hero__content">
           <p className="imperial-lead">Маршруты на карте, бронирования, контакты, красивые ракурсы</p>
           <button className="imperial-button" onClick={() => setCheckoutOpen(true)}>
