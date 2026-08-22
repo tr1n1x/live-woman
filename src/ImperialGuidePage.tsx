@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowRight, Check, Download, LockKeyhole, MapPin, X } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useSearchParams } from 'react-router-dom';
-import hero from './assets/imperial-guide-hero.png';
+import hero from './assets/imperial-guide-hero-v2.png';
 import scene from './assets/imperial-guide-scene.png';
 import cover from './assets/imperial-guide-cover.png';
 import preview from './assets/imperial-guide-preview.png';
