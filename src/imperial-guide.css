@@ -53,3 +53,12 @@
   .imperial-steps article,.imperial-steps article:last-child{border:1px solid #cfc2b5;padding:20px}
   .imperial-final{padding:42px 22px;background:#ded3c5}
 }
+
+@media(max-width:760px){
+  .imperial-guide{overflow-x:hidden}
+  .imperial-hero__content{z-index:2;margin-top:-155px;padding-top:32px;box-sizing:border-box}
+  .imperial-steps{overflow:hidden}
+  .imperial-steps h2{font-size:clamp(36px,10.5vw,44px);max-width:100%;overflow-wrap:anywhere}
+  .imperial-steps__grid{grid-template-columns:minmax(0,1fr);width:100%;box-sizing:border-box}
+  .imperial-steps article,.imperial-steps article:last-child{width:100%;min-width:0;box-sizing:border-box}
+}
