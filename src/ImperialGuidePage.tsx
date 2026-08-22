@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, Check, Download, LockKeyhole, X } from 'lucide-react';
+import { ArrowRight, Check, Download, X } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useSearchParams } from 'react-router-dom';
-import hero from './assets/imperial-guide-hero-v2.png';
+import hero from './assets/imperial-guide-hero.png';
 import scene from './assets/imperial-guide-scene.png';
 import cover from './assets/imperial-guide-cover.png';
 import preview from './assets/imperial-guide-preview.png';
 import './imperial-guide.css';
-
-const PRODUCT_TITLE = 'Императорский Петербург';
 
 export function ImperialGuidePage() {
   const [checkoutOpen, setCheckoutOpen] = useState(false);
@@ -45,15 +43,11 @@ export function ImperialGuidePage() {
 
       <section className="imperial-hero">
         <img src={hero} alt="Императорский Петербург" className="imperial-hero__image" />
-        <div className="imperial-hero__shade" />
         <div className="imperial-hero__content">
-          <p className="imperial-kicker">Готовый маршрут на 48 часов</p>
-          <h1>Императорский<br /><em>Петербург</em></h1>
-          <p className="imperial-lead">Яндекс Карты · бронирования · контакты · красивые ракурсы</p>
+          <p className="imperial-lead">Маршруты на карте, бронирования, контакты, красивые ракурсы</p>
           <button className="imperial-button" onClick={() => setCheckoutOpen(true)}>
             Купить гайд за 290 ₽ <ArrowRight size={18} />
           </button>
-          <span className="imperial-note">PDF-гайд откроется для скачивания сразу после оплаты</span>
         </div>
       </section>
 
@@ -82,7 +76,8 @@ export function ImperialGuidePage() {
       </section>
 
       <section className="imperial-quote">
-        <img src={scene} alt="Атмосфера императорского Петербурга" />
+        <div className="imperial-quote__photo"><img src={scene} alt="Атмосфера императорского Петербурга" /></div>
+        <div className="imperial-quote__brown" aria-hidden="true" />
       </section>
 
       <section className="imperial-steps">
@@ -96,12 +91,9 @@ export function ImperialGuidePage() {
       </section>
 
       <section className="imperial-final">
-        <h2>{PRODUCT_TITLE}</h2>
-        <div className="imperial-price">290 ₽</div>
         <button className="imperial-button imperial-button--dark" onClick={() => setCheckoutOpen(true)}>
-          Купить и скачать <ArrowRight size={18} />
+          Купить гайд <ArrowRight size={18} />
         </button>
-        <p><LockKeyhole size={14} /> Защищённая оплата и персональная ссылка на скачивание</p>
       </section>
 
       <footer className="imperial-footer">
