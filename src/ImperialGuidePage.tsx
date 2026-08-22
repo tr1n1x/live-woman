@@ -127,9 +127,11 @@ export function ImperialGuideDownloadPage() {
   const [params] = useSearchParams();
   const orderId = params.get('orderId') || '';
   const access = params.get('access') || '';
-  const [status, setStatus] = useState<'checking' | 'paid' | 'waiting' | 'error'>('checking');
+  const previewPaid = params.get('preview') === 'paid';
+  const [status, setStatus] = useState<'checking' | 'paid' | 'waiting' | 'error'>(previewPaid ? 'paid' : 'checking');
 
   useEffect(() => {
+    if (previewPaid) return;
     let timer: number | undefined;
     let attempts = 0;
     const check = async () => {
@@ -144,7 +146,7 @@ export function ImperialGuideDownloadPage() {
     };
     check();
     return () => timer && window.clearTimeout(timer);
-  }, [orderId, access]);
+  }, [orderId, access, previewPaid]);
 
   const downloadUrl = `/api/guide/download/${encodeURIComponent(orderId)}?access=${encodeURIComponent(access)}`;
   return (

@@ -85,7 +85,7 @@
 .imperial-hero__eyebrow{margin:0 0 25px;font-size:11px;font-weight:600;letter-spacing:.28em;text-transform:uppercase}
 .imperial-hero__title h1{margin:0;font-size:clamp(70px,7.4vw,118px);line-height:.76;letter-spacing:-.045em}
 .imperial-hero__title h1 em{font-weight:300}
-.imperial-hero__script{margin:25px 0 0 20px;font-family:"Marianna",cursive;font-size:clamp(38px,4vw,58px);line-height:1;color:#eadaca;transform:rotate(-2deg)}
+.imperial-hero__script{margin:25px 0 0 20px;font-family:"Marianna",cursive;font-size:clamp(38px,4vw,58px);line-height:1;color:#eadaca;transform:none}
 .imperial-hero__content{min-height:175px;padding-top:40px;padding-bottom:40px}
 
 @media(max-width:760px){
