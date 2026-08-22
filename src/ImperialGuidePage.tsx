@@ -5,6 +5,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import hero from './assets/imperial-guide-hero-clean.png';
 import dayOne from './assets/imperial-guide-day-1.png';
 import dayTwo from './assets/imperial-guide-day-2.png';
+import waterView from './assets/imperial-guide-water-view.png';
 import './imperial-guide.css';
 
 export function ImperialGuidePage() {
@@ -153,17 +154,22 @@ export function ImperialGuideDownloadPage() {
     <main className="imperial-download">
       <Helmet><title>Ваш гайд — Императорский Петербург</title></Helmet>
       <div className="imperial-download__card">
-        <p className="imperial-script">Спасибо</p>
-        {status === 'paid' ? <>
-          <h1>Гайд готов</h1>
-          <p>Сохраните его на телефон — и Петербург уже у вас в руках.</p>
-          <a className="imperial-button imperial-button--dark" href={downloadUrl}><Download size={18} /> Скачать PDF-гайд</a>
-        </> : status === 'error' ? <>
-          <h1>Не нашли заказ</h1><p>Проверьте, что открыли именно ту ссылку, на которую вас вернул банк.</p>
-        </> : <>
-          <h1>Проверяем оплату</h1><p>Обычно это занимает несколько секунд. Не закрывайте страницу.</p><div className="imperial-loader" />
-        </>}
-        <a className="imperial-support" href="https://t.me/AnnaZverkovaWeb" target="_blank" rel="noreferrer">Нужна помощь? Напишите нам</a>
+        <div className="imperial-download__photo" aria-hidden="true">
+          <img src={waterView} alt="" />
+        </div>
+        <div className="imperial-download__content">
+          <p className="imperial-script">Спасибо</p>
+          {status === 'paid' ? <>
+            <h1>Ваш гайд</h1>
+            <p>Сохраните и наслаждайтесь особенным Петербургом.</p>
+            <a className="imperial-button imperial-button--dark" href={downloadUrl}><Download size={18} /> Скачать PDF-гайд</a>
+          </> : status === 'error' ? <>
+            <h1>Не нашли заказ</h1><p>Проверьте, что открыли именно ту ссылку, на которую вас вернул банк.</p>
+          </> : <>
+            <h1>Проверяем оплату</h1><p>Обычно это занимает несколько секунд. Не закрывайте страницу.</p><div className="imperial-loader" />
+          </>}
+          <a className="imperial-support" href="https://t.me/AnnaZverkovaWeb" target="_blank" rel="noreferrer">Нужна помощь? Напишите нам</a>
+        </div>
       </div>
     </main>
   );
