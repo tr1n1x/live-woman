@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, Check, Download, LockKeyhole, MapPin, X } from 'lucide-react';
+import { ArrowRight, Check, Download, LockKeyhole, X } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useSearchParams } from 'react-router-dom';
 import hero from './assets/imperial-guide-hero-v2.png';
@@ -83,10 +83,6 @@ export function ImperialGuidePage() {
 
       <section className="imperial-quote">
         <img src={scene} alt="Атмосфера императорского Петербурга" />
-        <div>
-          <MapPin size={24} />
-          <p>Не смотреть на красивую жизнь.<br /><em>А примерять её на себя.</em></p>
-        </div>
       </section>
 
       <section className="imperial-steps">
@@ -100,7 +96,6 @@ export function ImperialGuidePage() {
       </section>
 
       <section className="imperial-final">
-        <p className="imperial-script">Открыть и пойти</p>
         <h2>{PRODUCT_TITLE}</h2>
         <div className="imperial-price">290 ₽</div>
         <button className="imperial-button imperial-button--dark" onClick={() => setCheckoutOpen(true)}>
