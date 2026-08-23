@@ -25,7 +25,7 @@ import {
   Sparkles,
   Music
 } from 'lucide-react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useParams, useLocation, useNavigate } from 'react-router-dom';
 
 // --- Asset Imports ---
@@ -56,6 +56,30 @@ import { ImperialGuideDownloadPage, ImperialGuidePage } from './ImperialGuidePag
 import './dream.css';
 
 // --- Types ---
+
+declare global {
+  interface Window {
+    ym?: (counterId: number, method: string, ...args: unknown[]) => void;
+  }
+}
+
+const METRIKA_COUNTER_ID = 109138564;
+
+function MetrikaPageTracker() {
+  const location = useLocation();
+  const previousPath = useRef(location.pathname);
+
+  useEffect(() => {
+    if (previousPath.current === location.pathname) return;
+    window.ym?.(METRIKA_COUNTER_ID, 'hit', location.pathname, {
+      referer: `${window.location.origin}${previousPath.current}`,
+      title: document.title,
+    });
+    previousPath.current = location.pathname;
+  }, [location.pathname]);
+
+  return null;
+}
 
 interface Event {
   id: string;
@@ -2072,6 +2096,7 @@ export default function App() {
     <HelmetProvider>
       <Router>
         <ScrollToTop />
+        <MetrikaPageTracker />
         <div className="min-h-screen selection:bg-brand-pink selection:text-white">
           <Nav />
           <Routes>
