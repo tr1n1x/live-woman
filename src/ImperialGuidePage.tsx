@@ -51,7 +51,7 @@ export function ImperialGuidePage() {
         <div className="imperial-hero__content">
           <p className="imperial-lead">Маршруты на карте, бронирования, контакты, красивые ракурсы</p>
           <button className="imperial-button" onClick={() => setCheckoutOpen(true)}>
-            Купить гайд за 290 ₽ <ArrowRight size={18} />
+            Купить гайд за 390 ₽ <ArrowRight size={18} />
           </button>
         </div>
       </section>
@@ -118,7 +118,7 @@ export function ImperialGuidePage() {
               <label>Email<input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Для восстановления доступа" /></label>
               {error && <div className="imperial-error">{error}</div>}
               <button className="imperial-button imperial-button--dark" disabled={submitting}>
-                {submitting ? 'Открываем оплату…' : 'Перейти к оплате · 290 ₽'}
+                {submitting ? 'Открываем оплату…' : 'Перейти к оплате · 390 ₽'}
               </button>
               <small>Нажимая кнопку, вы соглашаетесь с <Link to="/offer">офертой</Link> и <Link to="/privacy">политикой конфиденциальности</Link>.</small>
             </form>

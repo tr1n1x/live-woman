@@ -23,7 +23,7 @@ async function startServer() {
   const SITE_URL = process.env.SITE_URL || 'https://live-woman-energy.ru';
   const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
   const TELEGRAM_CHAT_IDS = (process.env.TELEGRAM_CHAT_IDS || '').split(',').map(id => id.trim()).filter(Boolean);
-  const GUIDE_PRICE = 29000;
+  const GUIDE_PRICE = 39000;
   const GUIDE_OWNER_EMAIL = process.env.GUIDE_OWNER_EMAIL || 'anna@tenceldream.ru';
   const GUIDE_FILE = path.join(process.cwd(), 'private', 'imperatorskiy-peterburg-guide.pdf');
   const GUIDE_ORDERS_FILE = path.join(process.cwd(), 'data', 'guide-orders.json');
@@ -300,7 +300,7 @@ async function startServer() {
           orders[orderId].paymentId = String(data.PaymentId || '');
         }
       });
-      await emailOwner('Новый заказ гайда «Императорский Петербург»', `Имя: ${name}\nEmail: ${email}\nЗаказ: ${orderId}\nСумма: 290 ₽\nСтатус: ожидает оплаты`);
+      await emailOwner('Новый заказ гайда «Императорский Петербург»', `Имя: ${name}\nEmail: ${email}\nЗаказ: ${orderId}\nСумма: 390 ₽\nСтатус: ожидает оплаты`);
       return res.json({ success: true, paymentUrl: data.PaymentURL });
     } catch (error) {
       console.error('Guide payment init error:', error);
@@ -357,7 +357,7 @@ async function startServer() {
             if (status === 'CONFIRMED') current[orderId].paidAt = new Date().toISOString();
           });
           if (status === 'CONFIRMED' && guideOrder.status !== 'CONFIRMED') {
-            await emailOwner('Гайд оплачен — 290 ₽', `Имя: ${guideOrder.name}\nEmail: ${guideOrder.email}\nЗаказ: ${orderId}\nПлатёж: ${notification.PaymentId}\nСтатус: оплачен, скачивание открыто`);
+            await emailOwner('Гайд оплачен — 390 ₽', `Имя: ${guideOrder.name}\nEmail: ${guideOrder.email}\nЗаказ: ${orderId}\nПлатёж: ${notification.PaymentId}\nСтатус: оплачен, скачивание открыто`);
           }
         }
       }
