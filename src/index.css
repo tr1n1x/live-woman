@@ -37,6 +37,22 @@
   font-family: var(--font-display);
 }
 
+.event-artwork { container-type: inline-size; }
+.event-artwork__breakfast-title {
+  position: absolute;
+  inset: 50% 5% auto;
+  transform: translateY(-50%);
+  color: #f3e8d7;
+  font-family: "Marianna", cursive;
+  font-size: 18cqw;
+  font-weight: 400;
+  line-height: .72;
+  text-align: center;
+  white-space: nowrap;
+  text-shadow: 0 2px 18px rgba(24, 10, 3, .2);
+  pointer-events: none;
+}
+
 .tracking-widest-plus {
   letter-spacing: 0.3em;
 }

@@ -47,7 +47,7 @@ import horsesImg from './assets/horses.jpg';
 import womanImg from './assets/woman.jpg';
 import gunsImg from './assets/guns.jpg';
 import makeupImg from './assets/makeup.jpg';
-import breakfastDreamsImg from './assets/breakfast-dreams.png';
+import breakfastDreamsImg from './assets/breakfast-dreams-bg.png';
 import svetlanaImg from './assets/svetlana.jpg';
 import DreamProjectPage, { DreamJoinPage } from './DreamProjectPage';
 import { ImperialGuideDownloadPage, ImperialGuidePage } from './ImperialGuidePage';
@@ -512,6 +512,13 @@ const SEO = ({ title, description, keywords }: { title?: string, description?: s
   </Helmet>
 );
 
+const EventArtwork = ({ event, className = '', alt = '' }: { event: Event; className?: string; alt?: string }) => (
+  <div className="event-artwork relative w-full h-full">
+    <img src={event.image} alt={alt} className={className} referrerPolicy="no-referrer" />
+    {event.id === '18' && <span className="event-artwork__breakfast-title" aria-hidden="true">Завтрак<br />о мечтах</span>}
+  </div>
+);
+
 const WomanSilhouette = ({ className = "" }: { className?: string }) => (
   <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" className={className}>
     <path d="M50 22c-4.5 0-8 3.5-8 8s3.5 8 8 8 8-3.5 8-8-3.5-8-8-8z" />
@@ -858,12 +865,7 @@ const EventCalendar = () => {
                     >
                       <Link to={`/event/${event.id}`} className="block">
                         <div className="relative aspect-[3/4] overflow-hidden rounded-[3rem] mb-8 shadow-xl shadow-brand-brown/5">
-                          <img 
-                            src={event.image} 
-                            alt={event.title} 
-                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                            referrerPolicy="no-referrer"
-                          />
+                          <EventArtwork event={event} alt={event.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
                           <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-5 py-2 rounded-full text-[10px] sm:text-xs tracking-[0.2em] font-bold uppercase text-brand-ink shadow-sm border border-brand-pink/10">
                             {event.date}
                           </div>
@@ -1115,12 +1117,7 @@ const EventDetail = () => {
                transition={{ delay: 0.4 }}
                className="aspect-[3/4] md:aspect-[4/5] rounded-[2rem] md:rounded-[4rem] overflow-hidden shadow-2xl"
             >
-              <img 
-                src={event.image} 
-                alt={event.title} 
-                className="w-full h-full object-cover object-center"
-                referrerPolicy="no-referrer"
-              />
+              <EventArtwork event={event} alt={event.title} className="w-full h-full object-cover object-center" />
             </motion.div>
 
             <motion.div 
@@ -1493,12 +1490,7 @@ const EventsPage = () => {
                     >
                       <Link to={`/event/${event.id}`} className="block">
                         <div className="relative aspect-[3/4] overflow-hidden rounded-[3rem] mb-8 shadow-xl shadow-brand-brown/5">
-                          <img 
-                            src={event.image} 
-                            alt={event.title} 
-                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                            referrerPolicy="no-referrer"
-                          />
+                          <EventArtwork event={event} alt={event.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
                           <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-5 py-2 rounded-full text-[10px] sm:text-xs tracking-[0.2em] font-bold uppercase text-brand-ink shadow-sm border border-brand-pink/10">
                             {event.date}
                           </div>
@@ -1608,7 +1600,7 @@ const CheckoutPage = () => {
               <h1 className="text-3xl serif-light text-brand-ink mb-8">Ваше участие</h1>
               <div className="flex flex-col sm:flex-row gap-6 mb-8 pb-8 border-b border-brand-pink/10">
                 <div className="w-full sm:w-24 h-48 sm:h-32 rounded-2xl overflow-hidden shadow-md">
-                  <img src={event.image} alt="" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  <EventArtwork event={event} className="w-full h-full object-cover" />
                 </div>
                 <div className="flex-grow">
                   <div className="text-[10px] uppercase tracking-widest text-brand-pink font-bold mb-2 text-center sm:text-left">{event.category}</div>
