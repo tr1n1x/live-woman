@@ -11,7 +11,7 @@ import workbookProject from './assets/workbook/project-table.png';
 import workbookScenario from './assets/workbook/scenario-minimum.png';
 import workbookWeek from './assets/workbook/price-week.png';
 
-const facts = ['24–28 августа', 'Ежедневно в 21:00 МСК', '5 прямых эфиров', 'Рабочая тетрадь', 'Записи встреч'];
+const facts = ['29 августа — 2 сентября', 'Ежедневно в 21:00 МСК', '5 прямых эфиров', 'Рабочая тетрадь', 'Записи встреч'];
 const steps = ['Выбрать', 'Уточнить', 'Спроектировать', 'Посчитать', 'Собрать в план'];
 
 const faqs = [
@@ -91,7 +91,7 @@ export default function DreamProjectPage() {
 
       <section className="dream-section dream-process dream-shell">
         <p className="dream-index">03 — Как проходит интенсив</p>
-        <div className="dream-heading-row"><h2>Пять дней.<br/><em>Одна мечта.</em></h2><div><p className="dream-schedule"><strong>24–28 августа</strong><span>Каждый день · 21:00 МСК</span></p><p>Каждый день — прямой эфир около 30 минут, одна тема и один следующий этап. Запись встречи сохраняется.</p></div></div>
+        <div className="dream-heading-row"><h2>Пять дней.<br/><em>Одна мечта.</em></h2><div><p className="dream-schedule"><strong>29 августа — 2 сентября</strong><span>Каждый день · 21:00 МСК</span></p><p>Каждый день — прямой эфир около 30 минут, одна тема и один следующий этап. Запись встречи сохраняется.</p></div></div>
         <div className="dream-format-grid">
           {[['01','Прямой эфир','Анна объясняет тему дня и даёт задание.'],['02','Рабочая тетрадь','Мысли, решения, цифры и итоговые выводы собираются в одном месте.'],['03','Задание дня','Каждый день открывает следующий этап движения.'],['04','Промт для ИИ','Готовый промт помогает применить тему к вашей мечте.']].map(([n,t,d]) => <article key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></article>)}
         </div>
@@ -169,7 +169,7 @@ export function DreamJoinPage({ plan }: { plan: 'solo' | 'vip' }) {
         <p className="dream-kicker">Мечта как проект · выбранный формат</p>
         <h1 id="dream-plan-title">{title}</h1>
         <div className="dream-join-price">{price}</div>
-        <p className="dream-join-schedule"><strong>24–28 августа</strong><span>Прямые эфиры ежедневно в 21:00 МСК</span></p>
+        <p className="dream-join-schedule"><strong>29 августа — 2 сентября</strong><span>Прямые эфиры ежедневно в 21:00 МСК</span></p>
         <div className="dream-join-line" />
         <h2>Присоединяйтесь<br/><em>к группе интенсива</em></h2>
         <p>Добавляйтесь в группу интенсива в Telegram. Ссылка на оплату придёт вам в сообщении.</p>
