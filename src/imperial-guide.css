@@ -108,6 +108,8 @@
 .imperial-download{background:#ded3c5;padding:clamp(18px,4vw,54px)}
 .imperial-download__card{width:min(900px,100%);padding:0;display:block;overflow:hidden;border-radius:30px;background:#f8f4ed;text-align:center}
 .imperial-download__photo{height:clamp(300px,38vh,390px);overflow:hidden;background:#6d8290}
+.imperial-download__preview-note{display:block;margin-top:12px;line-height:1.45;opacity:.68}
+.imperial-download .imperial-button:disabled{cursor:not-allowed;opacity:.58}
 .imperial-download__photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
 .imperial-download__content{display:flex;flex-direction:column;align-items:center;padding:46px 52px 40px}
 .imperial-download__content .imperial-script{margin:0 0 10px;font-size:46px}

@@ -167,7 +167,10 @@ export function ImperialGuideDownloadPage() {
           {status === 'paid' ? <>
             <h1>Ваш гайд</h1>
             <p>Сохраните и наслаждайтесь особенным Петербургом.</p>
-            <a className="imperial-button imperial-button--dark" href={downloadUrl}><Download size={18} /> Скачать PDF-гайд</a>
+            {previewPaid ? <>
+              <button className="imperial-button imperial-button--dark" type="button" disabled><Download size={18} /> Скачать PDF-гайд</button>
+              <small className="imperial-download__preview-note">В режиме предпросмотра скачивание отключено. После оплаты кнопка откроет ваш PDF-гайд.</small>
+            </> : <a className="imperial-button imperial-button--dark" href={downloadUrl}><Download size={18} /> Скачать PDF-гайд</a>}
           </> : status === 'error' ? <>
             <h1>Не нашли заказ</h1><p>Проверьте, что открыли именно ту ссылку, на которую вас вернул банк.</p>
           </> : <>
