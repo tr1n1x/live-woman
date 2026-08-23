@@ -86,15 +86,22 @@
 .imperial-hero__title h1{margin:0;font-size:clamp(70px,7.4vw,118px);line-height:.76;letter-spacing:-.045em}
 .imperial-hero__title h1 em{font-weight:300}
 .imperial-hero__script{margin:25px 0 0 20px;font-family:"Marianna",cursive;font-size:clamp(38px,4vw,58px);line-height:1;color:#eadaca;transform:none}
-.imperial-hero__content{min-height:175px;padding-top:40px;padding-bottom:40px}
+.imperial-hero__content{min-height:215px;padding-top:58px;padding-bottom:42px}
+.imperial-includes__page{position:relative;width:52%;max-width:340px;flex:none;box-shadow:0 25px 60px rgba(70,52,41,.18)}
+.imperial-includes__page img,.imperial-includes__page img:last-child{display:block;width:100%;max-width:none;margin:0;box-shadow:none}
+.imperial-includes__page:last-child{margin:90px 0 0 -55px}
+.imperial-includes__page--one span{position:absolute;z-index:2;left:8%;top:4%;font-family:"Marianna",cursive;font-size:clamp(30px,3vw,44px);line-height:1;color:#fff;text-shadow:0 2px 15px rgba(45,25,15,.6)}
 
 @media(max-width:760px){
   .imperial-hero__title{top:34px;left:22px;right:18px;max-width:285px;text-shadow:0 2px 18px rgba(25,14,8,.58)}
   .imperial-hero__eyebrow{margin-bottom:17px;font-size:8px;letter-spacing:.25em}
   .imperial-hero__title h1{font-size:clamp(47px,13.5vw,58px);line-height:.8;letter-spacing:-.035em}
   .imperial-hero__script{margin:17px 0 0 8px;font-size:34px;color:#f2e6d9}
-  .imperial-hero__content{min-height:0;margin-top:-112px;padding:67px 22px 31px;background:linear-gradient(180deg,rgba(241,236,227,0) 0%,rgba(241,236,227,.93) 35%,var(--cream) 58%)}
+  .imperial-hero__content{min-height:0;margin-top:-150px;padding:105px 22px 31px;background:linear-gradient(180deg,rgba(241,236,227,0) 0%,rgba(241,236,227,.93) 35%,var(--cream) 58%)}
   .imperial-hero__content .imperial-lead{font-size:24px;max-width:340px}
+  .imperial-includes__page{width:60%}
+  .imperial-includes__page:last-child{margin:65px 0 0 -55px}
+  .imperial-includes__page--one span{font-size:35px}
 }
 
 /* Download page: Petersburg from the water */

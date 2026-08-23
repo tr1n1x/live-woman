@@ -64,15 +64,20 @@ export function ImperialGuidePage() {
 
       <section className="imperial-includes">
         <div className="imperial-includes__visual">
-          <img src={dayOne} alt="Первый день маршрута — Старые деньги и красивая жизнь" />
-          <img src={dayTwo} alt="Второй день маршрута — Петербургская Ривьера" />
+          <div className="imperial-includes__page imperial-includes__page--one">
+            <img src={dayOne} alt="Первый день маршрута — Старые деньги и красивая жизнь" />
+            <span>День 1</span>
+          </div>
+          <div className="imperial-includes__page">
+            <img src={dayTwo} alt="Второй день маршрута — Петербургская Ривьера" />
+          </div>
         </div>
         <div className="imperial-includes__copy">
           <p className="imperial-kicker">Внутри гайда</p>
           <h2>Маршрут, который<br /><em>уже собран</em></h2>
           <ul>
             <li><Check size={18} /> готовые маршруты на два дня</li>
-            <li><Check size={18} /> ссылки на точки в Яндекс Картах</li>
+            <li><Check size={18} /> ссылки на точки в Яндекс Картах и 2ГИС</li>
             <li><Check size={18} /> контакты для бронирования</li>
             <li><Check size={18} /> порядок прогулки шаг за шагом</li>
             <li><Check size={18} /> точки и красивые ракурсы для фотографий</li>
