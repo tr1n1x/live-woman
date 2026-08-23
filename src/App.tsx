@@ -47,7 +47,7 @@ import horsesImg from './assets/horses.jpg';
 import womanImg from './assets/woman.jpg';
 import gunsImg from './assets/guns.jpg';
 import makeupImg from './assets/makeup.jpg';
-import dreamCoverImg from './assets/dream-cover.jpg';
+import breakfastDreamsImg from './assets/breakfast-dreams.png';
 import svetlanaImg from './assets/svetlana.jpg';
 import DreamProjectPage, { DreamJoinPage } from './DreamProjectPage';
 import { ImperialGuideDownloadPage, ImperialGuidePage } from './ImperialGuidePage';
@@ -100,6 +100,7 @@ interface Event {
   program?: string[];
   capacityLabel?: string;
   hidden?: boolean;
+  soldOut?: boolean;
 }
 
 // --- Mock Data ---
@@ -403,6 +404,7 @@ const EVENTS: Event[] = [
       bio: 'Работает с телом через понимание его структуры и взаимосвязей. Её занятия — это внимательное движение без перегрузки, где тело постепенно раскрывается и начинает «отзываться».'
     },
     capacityLabel: 'Всего 25 мест',
+    soldOut: true,
     program: [
       'Мягкая практика в тишине особняка',
       'Возвращение к ощущениям тела',
@@ -468,12 +470,12 @@ const EVENTS: Event[] = [
     id: '18',
     title: 'Завтрак о мечтах: <br /> Разрешить себе хотеть',
     date: '10 сентября',
-    time: '12:00',
+    time: '11:00',
     duration: '2 часа',
     location: 'Академия Шувалова (Санкт-Петербург)',
     description: 'Камерный завтрак о том, как снова услышать свои желания, отличить мечту от чужого сценария и разрешить себе хотеть красиво.',
     longDescription: 'Мы умеем ставить цели, решать задачи и быть взрослыми. Но в потоке дел собственные желания становятся тише, а чужое представление о правильной жизни начинает звучать громче.\n\nЗа завтраком мы поговорим о том, почему перестаём мечтать широко, как отличить своё желание от навязанного сценария и что меняется, когда разрешаешь себе хотеть красиво.\n\nЭто камерная встреча без правильных ответов — с живым разговором, вопросами, практикой и первым шагом к мечте, которую вы действительно выбираете для себя.',
-    image: dreamCoverImg,
+    image: breakfastDreamsImg,
     price: '900 ₽',
     category: 'Завтрак и самопознание',
     host: {
@@ -875,7 +877,7 @@ const EventCalendar = () => {
                           <h3 className="text-2xl serif-light group-hover:text-brand-pink transition-colors" dangerouslySetInnerHTML={{ __html: event.title }} />
                           <p className="text-base text-brand-brown/50 line-clamp-2 leading-relaxed">{event.description}</p>
                           <div className="flex justify-between items-center pt-4 border-t border-brand-pink/10">
-                            <span className="text-lg font-medium text-brand-ink whitespace-nowrap">{event.price}</span>
+                            <span className="text-lg font-medium text-brand-ink whitespace-nowrap">{event.soldOut ? 'SOLD OUT' : event.price}</span>
                             <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-brand-brown group-hover:underline transition-all">Подробнее</span>
                           </div>
                         </div>
@@ -1159,9 +1161,13 @@ const EventDetail = () => {
               <div className="pt-8 border-t border-brand-pink/10">
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
                    <div className="text-[10px] sm:text-xs uppercase tracking-widest text-brand-brown font-bold text-center sm:text-left">Стоимость участия</div>
-                   <div className="text-2xl sm:text-3xl serif-light text-brand-ink">{event.price}</div>
+                   <div className="text-2xl sm:text-3xl serif-light text-brand-ink">{event.soldOut ? 'SOLD OUT' : event.price}</div>
                 </div>
-                {event.price === 'Уточняется' || !event.price.includes('₽') ? (
+                {event.soldOut ? (
+                  <div className="w-full border border-brand-brown/20 bg-brand-brown/5 text-brand-brown/50 py-5 rounded-full font-bold text-lg text-center cursor-not-allowed">
+                    SOLD OUT
+                  </div>
+                ) : event.price === 'Уточняется' || !event.price.includes('₽') ? (
                   <Link 
                     to={`/checkout/${event.id}`}
                     className="w-full border border-brand-pink text-brand-pink py-5 rounded-full font-bold text-lg hover:bg-brand-pink hover:text-white transition-colors flex items-center justify-center gap-2"
@@ -1505,7 +1511,7 @@ const EventsPage = () => {
                           <h3 className="text-2xl serif-light group-hover:text-brand-pink transition-colors" dangerouslySetInnerHTML={{ __html: event.title }} />
                           <p className="text-base text-brand-brown/50 line-clamp-2 leading-relaxed">{event.description}</p>
                           <div className="flex justify-between items-center pt-4 border-t border-brand-pink/10 text-brand-ink font-medium">
-                            <span className="whitespace-nowrap">{event.price}</span>
+                            <span className="whitespace-nowrap">{event.soldOut ? 'SOLD OUT' : event.price}</span>
                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-all text-brand-pink" />
                           </div>
                         </div>
@@ -1526,10 +1532,10 @@ const EventsPage = () => {
               Проект «Живая Женщина» — это премиальное пространство в Санкт-Петербурге, где каждая встреча становится событием, меняющим масштаб вашей личности. Мы объединяем осознанных женщин для совместных практик, интеллектуальных лекториев и незабываемых впечатлений в самых атмосферных локациях города.
             </p>
             <p>
-              Наша афиша мероприятий охватывает все грани современной женщины: от мягких практик пилатеса в исторических особняках до драйвовых выездов на автодром или в стрелковый тир. Мы приглашаем топовых экспертов в области биохакинга, нутрициологии, визажа и психологии, чтобы вы могли инвестировать время в свой главный ресурс — в себя.
+              Наша афиша мероприятий охватывает разные грани современной женщины: от мягких практик пилатеса в исторических особняках до SPA-ритуалов, творческих мастер-классов и камерных завтраков. Мы приглашаем экспертов в области красоты, здоровья и психологии, чтобы вы могли инвестировать время в свой главный ресурс — в себя.
             </p>
             <p>
-              В нашем календаре вы найдете как классические SPA-ритуалы и женские бранчи, так и эксклюзивные форматы: школу верховой езды, мастер-классы по созданию «дорогого» образа и практики пробуждения чувственности через танец. Присоединяйтесь к нашему закрытому сообществу единомышленниц в СПб, чтобы обрести королевскую осанку, внутреннюю опору и то самое сияние, которое притягивает взгляды.
+              В нашем календаре вы найдете SPA-ритуалы, женские завтраки, школу верховой езды и мастер-классы по созданию уверенного образа. Присоединяйтесь к нашему закрытому сообществу единомышленниц в СПб, чтобы обрести внутреннюю опору, вдохновение и то самое сияние, которое притягивает взгляды.
             </p>
             <p>
               Каждый девичник «Живая Женщина» — это эстетическое удовольствие, бережная работа с состоянием и возможность выйти за рамки привычной рутины. Мы верим, что истинная сила женщины — в её многогранности, и помогаем раскрыть каждую из них через качественный отдых, новые знания и искреннее общение.
@@ -1550,6 +1556,7 @@ const CheckoutPage = () => {
   const [paymentError, setPaymentError] = useState('');
 
   if (!event) return <Navigate to="/events" replace />;
+  if (event.soldOut) return <Navigate to={`/event/${event.id}`} replace />;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
