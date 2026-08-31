@@ -415,14 +415,14 @@ const EVENTS: Event[] = [
   {
     id: '16',
     title: 'Спа-ритуал <br /> в Palace Bridge',
-    date: '8 сентября',
-    time: '12:00',
+    date: '26 сентября',
+    time: '11:00',
     duration: '3 часа',
     location: 'Palace Bridge, Биржевой переулок, 2-4 (Санкт-Петербург)',
-    description: 'Глубокая перезагрузка в атмосфере "тихой роскоши". Обретаем внутреннюю гармонию в сердце города.',
-    longDescription: 'Осень — время возвращения к своему центру. Мы приглашаем вас в Palace Bridge, чтобы смыть городской шум и наполнить себя теплом. \n\nВ программе — бережный уход за телом, созерцание и практики, которые помогают услышать свой внутренний голос. Это не просто отдых, а ритуал обретения целостности.\n\n*На встрече будет проходить небольшая фото- и видеосъемка.*',
+    description: 'Глубокая перезагрузка и возвращение к себе в самом сердце города.',
+    longDescription: 'Осень — время возвращения к своему центру. Мы приглашаем вас в Palace Bridge, чтобы смыть городской шум и наполнить себя теплом. \n\nСтоимость участия складывается из входа в SPA-комплекс — 4 200 ₽ и организационного сбора — 500 ₽.\n\nВ программе — бережный уход за телом, созерцание и практики, которые помогают услышать свой внутренний голос. Это не просто отдых, а ритуал обретения целостности.\n\n*На встрече будет проходить небольшая фото- и видеосъемка.*',
     image: visit3Img,
-    price: '4 000 ₽',
+    price: '4 700 ₽',
     category: 'SPA и ритуалы',
     host: {
       name: 'Анна Зверкова',
@@ -430,7 +430,7 @@ const EVENTS: Event[] = [
       image: annaImg,
       bio: 'Помогаю женщинам восстановить связь со своей природной красотой через бережные ритуалы и глубокие практики.'
     },
-    capacityLabel: 'Всего 10 мест',
+    capacityLabel: 'Всего 6 мест',
     program: [
       'Тепловая терапия: магия саун и хаммама',
       'Погружение в тишину: медитативный отдых у воды',
@@ -469,14 +469,14 @@ const EVENTS: Event[] = [
   {
     id: '18',
     title: 'Завтрак о мечтах: <br /> Разрешить себе хотеть',
-    date: '10 сентября',
+    date: '12 сентября',
     time: '11:00',
     duration: '2 часа',
     location: 'Академия Шувалова (Санкт-Петербург)',
     description: 'Камерный завтрак о том, как снова услышать свои желания, отличить мечту от чужого сценария и разрешить себе хотеть красиво.',
     longDescription: 'Мы умеем ставить цели, решать задачи и быть взрослыми. Но в потоке дел собственные желания становятся тише, а чужое представление о правильной жизни начинает звучать громче.\n\nЗа завтраком мы поговорим о том, почему перестаём мечтать широко, как отличить своё желание от навязанного сценария и что меняется, когда разрешаешь себе хотеть красиво.\n\nЭто камерная встреча без правильных ответов — с живым разговором, вопросами, практикой и первым шагом к мечте, которую вы действительно выбираете для себя.',
     image: breakfastDreamsImg,
-    price: '900 ₽',
+    price: 'Бесплатно',
     category: 'Завтрак и самопознание',
     host: {
       name: 'Анна Зверкова',
@@ -484,6 +484,7 @@ const EVENTS: Event[] = [
       image: annaImg,
       bio: 'Предприниматель, основатель бренда Tencel Dream и автор проекта «Живая женщина». Помогает женщинам услышать собственные желания и превратить большое «хочу» в выбранный маршрут.'
     },
+    capacityLabel: 'Всего 6 мест',
     program: [
       'Почему мечта становится тише',
       'Как отличить своё желание от чужого сценария',
@@ -1164,6 +1165,13 @@ const EventDetail = () => {
                   <div className="w-full border border-brand-brown/20 bg-brand-brown/5 text-brand-brown/50 py-5 rounded-full font-bold text-lg text-center cursor-not-allowed">
                     SOLD OUT
                   </div>
+                ) : event.price === 'Бесплатно' ? (
+                  <Link
+                    to={`/checkout/${event.id}`}
+                    className="w-full bg-brand-pink text-white py-5 rounded-full font-bold text-lg hover:bg-brand-brown transition-colors shadow-xl shadow-brand-brown/20 flex items-center justify-center"
+                  >
+                    Зарегистрироваться
+                  </Link>
                 ) : event.price === 'Уточняется' || !event.price.includes('₽') ? (
                   <Link 
                     to={`/checkout/${event.id}`}
@@ -1539,7 +1547,8 @@ const CheckoutPage = () => {
 
     try {
       const cleanTitle = event.title.replace(/<br\s*\/?>/gi, ' ');
-      const isPreorder = event.price === 'Уточняется' || !event.price.includes('₽');
+      const isFreeRegistration = event.price === 'Бесплатно';
+      const isPreorder = !isFreeRegistration && (event.price === 'Уточняется' || !event.price.includes('₽'));
       const priceValue = isPreorder ? 0 : (parseInt(event.price.replace(/[^\d]/g, '')) || 0);
       const amountKopeks = priceValue * 100;
       const orderId = `LW-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
@@ -1556,13 +1565,16 @@ const CheckoutPage = () => {
           customerPhone: formData.phone,
           customerTelegram: formData.telegram,
           eventId: event.id,
+          isFreeRegistration,
         }),
       });
 
       const data = await response.json();
 
       if (data.success) {
-        if (data.isPreorder) {
+        if (data.isFreeRegistration) {
+          navigate('/success?registered=true');
+        } else if (data.isPreorder) {
           // Редирект на страницу успеха для предзаписи
           navigate('/success?preorder=true');
         } else if (data.paymentUrl) {
@@ -1682,7 +1694,7 @@ const CheckoutPage = () => {
                   />
                 ) : (
                   <>
-                    <span>{event.price === 'Уточняется' || !event.price.includes('₽') ? 'Отправить заявку' : 'Оплатить участие'}</span>
+                    <span>{event.price === 'Бесплатно' ? 'Зарегистрироваться' : event.price === 'Уточняется' || !event.price.includes('₽') ? 'Отправить заявку' : 'Оплатить участие'}</span>
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </>
                 )}
@@ -1712,6 +1724,7 @@ const SuccessPage = () => {
   const [searchParams] = React.useSearchParams();
   const orderId = searchParams.get('orderId');
   const isPreorder = searchParams.get('preorder') === 'true';
+  const isRegistered = searchParams.get('registered') === 'true';
 
   return (
     <motion.div 
@@ -1720,7 +1733,7 @@ const SuccessPage = () => {
       exit={{ opacity: 0 }}
       className="min-h-screen py-40 px-6 flex items-center justify-center text-center"
     >
-      <SEO title={isPreorder ? "Заявка принята" : "До встречи!"} />
+      <SEO title={isPreorder ? "Заявка принята" : isRegistered ? "Вы зарегистрированы" : "До встречи!"} />
       <div className="max-w-2xl px-8">
         <motion.div 
           initial={{ scale: 0.8, opacity: 0 }}
@@ -1738,11 +1751,13 @@ const SuccessPage = () => {
         </motion.div>
         
         <h1 className="text-3xl md:text-5xl serif-light text-brand-ink mb-8">
-          {isPreorder ? 'Заявка принята!' : 'Билет забронирован!'}
+          {isPreorder ? 'Заявка принята!' : isRegistered ? 'Вы зарегистрированы!' : 'Билет забронирован!'}
         </h1>
         <p className="text-lg md:text-xl text-brand-brown/70 serif-light leading-relaxed mb-12">
-          {isPreorder 
+          {isPreorder
             ? 'Мы получили ваш запрос. Как только откроется запись и определится стоимость, мы свяжемся с вами в Telegram.'
+            : isRegistered
+              ? 'Ваше место сохранено. Мы свяжемся с вами в Telegram и пришлём детали встречи.'
             : 'Ваша оплата прошла успешно. В ближайшее время в Telegram вам придет подтверждение и детали встречи.'}
         </p>
         

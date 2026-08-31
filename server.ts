@@ -171,18 +171,18 @@ async function startServer() {
 
   app.post('/api/payment/init', async (req, res) => {
     try {
-      const { orderId, amount, description, customerName, customerPhone, customerTelegram, eventTitle, eventId } = req.body;
+      const { orderId, amount, description, customerName, customerPhone, customerTelegram, eventTitle, eventId, isFreeRegistration } = req.body;
 
-      if (!orderId || !amount || !description) {
+      if (!orderId || amount === undefined || amount === null || !description) {
         return res.status(400).json({ error: 'Missing required fields' });
       }
 
       if (amount <= 0 || !eventTitle || eventTitle.includes('Уточняется')) {
-        // Это ПРЕДЗАПИСЬ (без оплаты)
+        // Бесплатная регистрация или предзапись без оплаты
         const header = getEventHeader(eventId, eventTitle, false);
 
         const preorderMessage = [
-          `<b>${header}</b>`,
+          `<b>${isFreeRegistration ? `✅ БЕСПЛАТНАЯ РЕГИСТРАЦИЯ | ${EVENT_HEADERS[eventId] || eventTitle}` : header}</b>`,
           `━━━━━━━━━━━━━━━━━━`,
           `🎫 <b>Событие:</b> ${eventTitle || description}`,
           `👤 <b>Имя:</b> ${customerName || 'Не указано'}`,
@@ -190,11 +190,11 @@ async function startServer() {
           `✈️ <b>Telegram:</b> ${customerTelegram ? '@' + customerTelegram.replace('@', '') : 'Не указан'}`,
           `🆔 <b>Заказ:</b> #${orderId}`,
           `━━━━━━━━━━━━━━━━━━`,
-          `✨ Заявка в чат предзаписи.`
+          isFreeRegistration ? `✨ Место участницы зарегистрировано.` : `✨ Заявка в чат предзаписи.`
         ].join('\n');
 
         await sendTelegramMessage(preorderMessage, eventId);
-        return res.json({ success: true, isPreorder: true });
+        return res.json({ success: true, isPreorder: !isFreeRegistration, isFreeRegistration: Boolean(isFreeRegistration) });
       }
 
       // 1. Отправляем ПЕРВОЕ сообщение в Telegram (Данные пользователя)
