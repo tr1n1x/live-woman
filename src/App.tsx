@@ -1153,7 +1153,9 @@ const EventDetail = () => {
                 </div>
                 <div className="text-center">
                   <h5 className="text-3xl font-display italic text-brand-ink mb-1">{event.host.name}</h5>
-                  <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-brand-pink">{event.host.role}</p>
+                  {event.host.name !== 'Анна Зверкова' && (
+                    <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-brand-pink">{event.host.role}</p>
+                  )}
                 </div>
               </div>
               <p className="text-brand-brown/70 italic serif-light text-base leading-relaxed mb-8">
