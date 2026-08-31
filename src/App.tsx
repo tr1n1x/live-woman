@@ -404,6 +404,7 @@ const EVENTS: Event[] = [
       bio: 'Работает с телом через понимание его структуры и взаимосвязей. Её занятия — это внимательное движение без перегрузки, где тело постепенно раскрывается и начинает «отзываться».'
     },
     capacityLabel: 'Всего 25 мест',
+    hidden: true,
     soldOut: true,
     program: [
       'Мягкая практика в тишине особняка',
@@ -847,7 +848,9 @@ const EventCalendar = () => {
           ].filter(monthGroup => 
             EVENTS.some(e => !e.hidden && e.date.toLowerCase().includes(monthGroup.key))
           ).slice(0, 2).map((monthGroup) => {
-            const monthEvents = EVENTS.filter(e => !e.hidden && e.date.toLowerCase().includes(monthGroup.key));
+            const monthEvents = EVENTS
+              .filter(e => !e.hidden && e.date.toLowerCase().includes(monthGroup.key))
+              .sort((a, b) => parseInt(a.date, 10) - parseInt(b.date, 10));
             if (monthEvents.length === 0) return null;
 
             return (
@@ -1480,7 +1483,9 @@ const EventsPage = () => {
             { month: 'Август', key: 'августа' },
             { month: 'Сентябрь', key: 'сентября' },
           ].map((monthGroup) => {
-            const monthEvents = EVENTS.filter(e => !e.hidden && e.date.toLowerCase().includes(monthGroup.key));
+            const monthEvents = EVENTS
+              .filter(e => !e.hidden && e.date.toLowerCase().includes(monthGroup.key))
+              .sort((a, b) => parseInt(a.date, 10) - parseInt(b.date, 10));
             if (monthEvents.length === 0) return null;
 
             return (
