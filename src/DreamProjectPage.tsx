@@ -11,7 +11,7 @@ import workbookProject from './assets/workbook/project-table.png';
 import workbookScenario from './assets/workbook/scenario-minimum.png';
 import workbookWeek from './assets/workbook/price-week.png';
 
-const facts = ['29 августа — 2 сентября', 'Ежедневно в 21:00 МСК', '5 прямых эфиров', 'Рабочая тетрадь', 'Записи встреч'];
+const facts = ['13–17 сентября', 'Ежедневно в 12:00 МСК', '5 прямых эфиров', 'Рабочая тетрадь', 'Записи встреч'];
 const steps = ['Выбрать', 'Уточнить', 'Спроектировать', 'Посчитать', 'Собрать в план'];
 
 const faqs = [
@@ -91,7 +91,7 @@ export default function DreamProjectPage() {
 
       <section className="dream-section dream-process dream-shell">
         <p className="dream-index">03 — Как проходит интенсив</p>
-        <div className="dream-heading-row"><h2>Пять дней.<br/><em>Одна мечта.</em></h2><div><p className="dream-schedule"><strong>29 августа — 2 сентября</strong><span>Каждый день · 21:00 МСК</span></p><p>Каждый день — прямой эфир около 30 минут, одна тема и один следующий этап. Запись встречи сохраняется.</p></div></div>
+        <div className="dream-heading-row"><h2>Пять дней.<br/><em>Одна мечта.</em></h2><div><p className="dream-schedule"><strong>13–17 сентября</strong><span>Каждый день · 12:00 МСК</span></p><p>Каждый день — прямой эфир около 30 минут, одна тема и один следующий этап. Запись встречи сохраняется.</p></div></div>
         <div className="dream-format-grid">
           {[['01','Прямой эфир','Анна объясняет тему дня и даёт задание.'],['02','Рабочая тетрадь','Мысли, решения, цифры и итоговые выводы собираются в одном месте.'],['03','Задание дня','Каждый день открывает следующий этап движения.'],['04','Промт для ИИ','Готовый промт помогает применить тему к вашей мечте.']].map(([n,t,d]) => <article key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></article>)}
         </div>
@@ -116,8 +116,8 @@ export default function DreamProjectPage() {
       <section id="tariffs" className="dream-section dream-tariffs dream-shell">
         <p className="dream-index">07 — Форматы участия</p><h2>Выберите свой<br/><em>способ движения</em></h2>
         <div className="dream-tariff-grid">
-          <article className="dream-price-row"><div className="dream-price-row__title"><div><p className="dream-tariff__label">Самостоятельно</p><p className="dream-tariff__places">10 мест</p></div><h3>2 000 ₽</h3></div><div className="dream-price-row__body"><ul>{['5 прямых эфиров','Записи всех встреч','Рабочая тетрадь','Задания каждого дня','Готовые промты для ИИ','Версии для платных и бесплатных тарифов ИИ','Материалы интенсива'].map(x=><li key={x}>{x}</li>)}</ul><Button href="/mechta-kak-proekt-tarif-solo">Выбрать</Button></div></article>
-          <article className="dream-price-row dream-price-row--accent"><div className="dream-price-row__title"><div><p className="dream-tariff__label">С сопровождением</p><p className="dream-tariff__places">5 мест</p></div><h3>5 000 ₽</h3></div><div className="dream-price-row__body"><div><p>Всё из формата «Самостоятельно»</p><ul>{['Личный разбор мечты с Анной','Помощь с расчётами и Excel','Структура проекта','Поиск вариантов реализации','До 60 минут личной работы Анны'].map(x=><li key={x}>{x}</li>)}</ul></div><Button href="/mechta-kak-proekt-tarif-vip">Хочу с Анной</Button></div></article>
+          <article className="dream-price-row"><div className="dream-price-row__title"><div><p className="dream-tariff__label">Самостоятельно</p><p className="dream-tariff__places">10 мест</p></div><h3>5 000 ₽</h3></div><div className="dream-price-row__body"><ul>{['5 прямых эфиров','Записи всех встреч','Рабочая тетрадь','Задания каждого дня','Готовые промты для ИИ','Версии для платных и бесплатных тарифов ИИ','Материалы интенсива'].map(x=><li key={x}>{x}</li>)}</ul><Button href="/mechta-kak-proekt-tarif-solo">Выбрать</Button></div></article>
+          <article className="dream-price-row dream-price-row--accent"><div className="dream-price-row__title"><div><p className="dream-tariff__label">С сопровождением</p><p className="dream-tariff__places">5 мест</p></div><h3>10 000 ₽</h3></div><div className="dream-price-row__body"><div><p>Всё из формата «Самостоятельно»</p><ul>{['Личный разбор мечты с Анной','Помощь с расчётами и Excel','Структура проекта','Поиск вариантов реализации','До 60 минут личной работы Анны'].map(x=><li key={x}>{x}</li>)}</ul></div><Button href="/mechta-kak-proekt-tarif-vip">Хочу с Анной</Button></div></article>
         </div>
         <div className="dream-cohort"><h3>Первый поток —<br/><em>15 участниц</em></h3><div><p><strong>10 мест</strong><br/>самостоятельная работа</p><p><strong>5 мест</strong><br/>личное сопровождение Анны</p><p>Во втором формате Анна лично подключается к каждой мечте и выделяет время на индивидуальную работу.</p></div></div>
       </section>
@@ -140,7 +140,7 @@ export default function DreamProjectPage() {
 
       <section className="dream-section dream-faq dream-shell"><p className="dream-index">09 — Вопросы</p><div className="dream-faq__grid"><h2>Всё важное<br/><em>перед стартом</em></h2><div>{faqs.map(([q,a],i)=><article className={openFaq===i?'is-open':''} key={q}><button onClick={()=>setOpenFaq(openFaq===i?null:i)} aria-expanded={openFaq===i}><span>{q}</span><ChevronDown size={18}/></button><div><p>{a}</p></div></article>)}</div></div></section>
 
-      <section id="join" className="dream-final"><div className="dream-shell"><p className="dream-kicker">Мечта как проект</p><h2>Выберите одну мечту<br/>и дайте ей <em>5 дней внимания</em></h2><p>За это время у неё появятся форма, цифры,<br/>варианты и следующий шаг.</p><strong>от 2 000 ₽</strong><Button light href="https://t.me/AnnaZverkovaWeb">Присоединиться</Button><div className="dream-final__motto">Мечтать широко. Считать точно. Двигаться по шагам.</div></div></section>
+      <section id="join" className="dream-final"><div className="dream-shell"><p className="dream-kicker">Мечта как проект</p><h2>Выберите одну мечту<br/>и дайте ей <em>5 дней внимания</em></h2><p>За это время у неё появятся форма, цифры,<br/>варианты и следующий шаг.</p><strong>от 5 000 ₽</strong><Button light href="https://t.me/AnnaZverkovaWeb">Присоединиться</Button><div className="dream-final__motto">Мечтать широко. Считать точно. Двигаться по шагам.</div></div></section>
     </main>
   );
 }
@@ -149,7 +149,7 @@ export function DreamJoinPage({ plan }: { plan: 'solo' | 'vip' }) {
   const navigate = useNavigate();
   const support = plan === 'vip';
   const title = support ? 'С сопровождением' : 'Самостоятельно';
-  const price = support ? '5 000 ₽' : '2 000 ₽';
+  const price = support ? '10 000 ₽' : '5 000 ₽';
   const telegram = support ? 'https://t.me/+S6zALjcy5Q01NzMy' : 'https://t.me/+EjaGuBbzCl5mYzU6';
   const close = () => navigate('/dream-project#tariffs');
 
@@ -169,7 +169,7 @@ export function DreamJoinPage({ plan }: { plan: 'solo' | 'vip' }) {
         <p className="dream-kicker">Мечта как проект · выбранный формат</p>
         <h1 id="dream-plan-title">{title}</h1>
         <div className="dream-join-price">{price}</div>
-        <p className="dream-join-schedule"><strong>29 августа — 2 сентября</strong><span>Прямые эфиры ежедневно в 21:00 МСК</span></p>
+        <p className="dream-join-schedule"><strong>13–17 сентября</strong><span>Прямые эфиры ежедневно в 12:00 МСК</span></p>
         <div className="dream-join-line" />
         <h2>Присоединяйтесь<br/><em>к группе интенсива</em></h2>
         <p>Добавляйтесь в группу интенсива в Telegram. Ссылка на оплату придёт вам в сообщении.</p>
